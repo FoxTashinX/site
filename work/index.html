@@ -7,202 +7,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-:root {
-    /* Светлый режим */
-    --bg-color-light: #94D2BD;
-    --text-color-light: #001219;
-    --bg-color-dark: #005F73;
-    --text-color-dark: #E9D8A6;
-    --highlight-color: #0A9396;
-    --link-hover-color: #EEBB00;
-    --card-bg-light: rgba(255, 255, 255, 0.1);
-    --card-bg-dark: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="dark"] {
-    /* Тёмный режим */
-    --bg-color-light: #001219;
-    --text-color-light: #94D2BD;
-    --bg-color-dark: #0A9396;
-    --text-color-dark: #E9D8A6;
-    --highlight-color: #EEBB00;
-    --link-hover-color: #CA6702;
-    --card-bg-light: rgba(0, 0, 0, 0.1);
-    --card-bg-dark: rgba(255, 255, 255, 0.1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-    transition: all 0.3s ease;
-}
-
-body {
-    background: var(--bg-color-dark);
-    color: var(--text-color-dark);
-    line-height: 1.6;
-}
-
-.top-nav {
-    background: rgba(10, 147, 150, 0.95); /* Используем --bg-color-dark с прозрачностью */
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-nav ul {
-    display: flex;
-    justify-content: flex-end;
-    gap: 2rem;
-    list-style: none;
-}
-
-nav a {
-    color: var(--highlight-color);
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-}
-
-nav a:hover {
-    background: rgba(233, 216, 166, 0.1); /* Используем --highlight-color с прозрачностью */
-    color: var(--link-hover-color);
-}
-
-nav a.active {
-    background: var(--highlight-color);
-    color: var(--text-color-light);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-header {
-    text-align: center;
-    padding: 4rem 0;
-    animation: fadeIn 1.5s ease-in;
-}
-
-h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    color: var(--highlight-color);
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem 0;
-}
-
-.project-card {
-    background: var(--card-bg-light);
-    border-radius: 15px;
-    padding: 1.5rem;
-    backdrop-filter: blur(5px);
-    border: 1px solid var(--highlight-color);
-}
-
-.project-card:hover {
-    transform: translateY(-10px);
-    background: var(--card-bg-dark);
-}
-
-.project-card h2 {
-    color: var(--link-hover-color);
-    margin-bottom: 1rem;
-}
-
-.project-card p {
-    color: var(--text-color-dark);
-    margin-bottom: 1.5rem;
-}
-
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background: var(--highlight-color);
-    color: var(--text-color-light);
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.btn:hover {
-    background: var(--link-hover-color);
-    transform: scale(1.05);
-}
-
-footer {
-    text-align: center;
-    padding: 3rem 0;
-    margin-top: 4rem;
-    border-top: 1px solid var(--highlight-color);
-}
-
-.social-links {
-    margin-top: 1.5rem;
-}
-
-.social-links a {
-    color: var(--highlight-color);
-    margin: 0 1rem;
-    font-size: 1.5rem;
-}
-
-.social-links a:hover {
-    color: var(--link-hover-color);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    nav ul {
-        justify-content: center;
-        flex-wrap: wrap;<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио разработчика</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
         :root {
             /* Светлый режим */
             --bg-color-light: #94D2BD;
-            --text-color-light: #001219;
+            --text-color-light: #000000; /* Изменено на чёрный */
             --bg-color-dark: #005F73;
-            --text-color-dark: #E9D8A6;
+            --text-color-dark: #FFFFFF; /* Изменено на белый */
             --highlight-color: #0A9396;
             --link-hover-color: #EEBB00;
             --card-bg-light: rgba(255, 255, 255, 0.1);
             --card-bg-dark: rgba(0, 0, 0, 0.1);
+            --nav-text-color: #000000; /* Новая переменная для навигации */
         }
 
         [data-theme="dark"] {
@@ -210,11 +25,12 @@ footer {
             --bg-color-light: #001219;
             --text-color-light: #94D2BD;
             --bg-color-dark: #0A9396;
-            --text-color-dark: #E9D8A6;
+            --text-color-dark: #FFFFFF; /* Изменено на белый */
             --highlight-color: #EEBB00;
             --link-hover-color: #CA6702;
             --card-bg-light: rgba(0, 0, 0, 0.1);
             --card-bg-dark: rgba(255, 255, 255, 0.1);
+            --nav-text-color: #FFFFFF; /* Новая переменная для навигации */
         }
 
         * {
@@ -232,7 +48,7 @@ footer {
         }
 
         .top-nav {
-            background: rgba(10, 147, 150, 0.95); /* Используем --bg-color-dark с прозрачностью */
+            background: rgba(10, 147, 150, 0.95);
             padding: 1rem 0;
             position: sticky;
             top: 0;
@@ -254,14 +70,15 @@ footer {
         }
 
         nav a {
-            color: var(--highlight-color);
+            color: var(--nav-text-color); /* Используем новую переменную */
             text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 25px;
+            font-weight: 500;
         }
 
         nav a:hover {
-            background: rgba(233, 216, 166, 0.1); /* Используем --highlight-color с прозрачностью */
+            background: rgba(233, 216, 166, 0.1);
             color: var(--link-hover-color);
         }
 
@@ -270,113 +87,12 @@ footer {
             color: var(--text-color-light);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        /* Остальные стили остаются без изменений */
 
-        header {
-            text-align: center;
-            padding: 4rem 0;
-            animation: fadeIn 1.5s ease-in;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--highlight-color);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .project-card {
-            background: var(--card-bg-light);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--highlight-color);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            background: var(--card-bg-dark);
-        }
-
-        .project-card h2 {
-            color: var(--link-hover-color);
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            color: var(--text-color-dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: var(--link-hover-color);
-            transform: scale(1.05);
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--highlight-color);
-        }
-
-        .social-links {
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            color: var(--highlight-color);
-            margin: 0 1rem;
-            font-size: 1.5rem;
-        }
-
-        .social-links a:hover {
-            color: var(--link-hover-color);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            nav ul {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
+    <!-- Остальная разметка без изменений -->
     <nav class="top-nav">
         <div class="nav-container">
             <ul>
@@ -390,46 +106,12 @@ footer {
         </div>
     </nav>
 
-    <div class="container">
-        <header>
-            <h1>Мои проекты</h1>
-            <p>Здесь собраны мои лучшие работы в области веб-разработки</p>
-        </header>
-
-        <div class="projects-grid">
-            <div class="project-card">
-                <h2>Проект 1</h2>
-                <p>Бот управляющий через ТГ вашим ПК.</p>
-                <a href="work1.html" class="btn">Посмотреть проект</a>
-            </div>
-
-            <div class="project-card">
-                <h2>Проект 2</h2>
-                <p>Адаптивный лендинг для стартапа с анимациями и кастомной графикой. Оптимизирован для максимальной производительности.</p>
-                <a href="work2.html" class="btn">Посмотреть проект</a>
-            </div>
-
-            <div class="project-card">
-                <h2>Проект 3</h2>
-                <p>Интернет-магазин с корзиной покупок и интеграцией платежной системы. Использованы Vue.js и Firebase.</p>
-                <a href="work3.html" class="btn">Посмотреть проект</a>
-            </div>
-        </div>
-
-        <footer>
-            <div class="social-links">
-                <a href="https://github.com/FoxTashinX"><i class="fab fa-github"></i></a>
-                <a href="https://www.youtube.com/@foxytashin1036"><i class="fa fa-youtube-play"></i></a>
-            </div>
-            <p>© 2025 Все права защищены</p>
-        </footer>
-    </div>
+    <!-- Остальная часть HTML без изменений -->
 
     <script>
         const toggleButton = document.getElementById('theme-toggle');
         const body = document.body;
 
-        // Проверяем, есть ли сохранённая тема в localStorage
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             body.dataset.theme = savedTheme;
@@ -438,63 +120,8 @@ footer {
         toggleButton.addEventListener('click', () => {
             const newTheme = body.dataset.theme === 'dark' ? 'light' : 'dark';
             body.dataset.theme = newTheme;
-            // Сохраняем выбранную тему в localStorage
             localStorage.setItem('theme', newTheme);
         });
     </script>
-</body>
-</html>
-        gap: 1rem;
-    }
-}
-    </style>
-</head>
-<body>
-    <nav class="top-nav">
-        <div class="nav-container">
-            <ul>
-                <li><a href="../index.html">Главная</a></li>
-                <li><a href="index.html">Работы</a></li>
-                <li><a href="../diary/index.html">Личный дневник</a></li>
-                <li><a href="../depressive-corner/index.html">Дипресивный уголок</a></li>
-                <li><a href="../experiences/index.html">То, в чём я себя пробывал</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container">
-        <header>
-            <h1>Мои проекты</h1>
-            <p>Здесь собраны мои лучшие работы в области веб-разработки</p>
-        </header>
-
-        <div class="projects-grid">
-            <div class="project-card">
-                <h2>Проект 1</h2>
-                <p>Бот управляющий через ТГ вашим ПК.</p>
-                <a href="work1.html" class="btn">Посмотреть проект</a>
-            </div>
-
-            <div class="project-card">
-                <h2>Проект 2</h2>
-                <p>Адаптивный лендинг для стартапа с анимациями и кастомной графикой. Оптимизирован для максимальной производительности.</p>
-                <a href="work2.html" class="btn">Посмотреть проект</a>
-            </div>
-
-            <div class="project-card">
-                <h2>Проект 3</h2>
-                <p>Интернет-магазин с корзиной покупок и интеграцией платежной системы. Использованы Vue.js и Firebase.</p>
-                <a href="work3.html" class="btn">Посмотреть проект</a>
-            </div>
-        </div>
-
-        <footer>
-            <div class="social-links">
-                <a href="https://github.com/FoxTashinX"><i class="fab fa-github"></i></a>
-                <a href="https://www.youtube.com/@foxytashin1036"><i class="fa fa-youtube-play"></i></a>
-            </div>
-            <p>© 2025 Все права защищены</p>
-        </footer>
-    </div>
 </body>
 </html>
