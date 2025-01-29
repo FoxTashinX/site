@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <title>Работа 1</title>
+    <style>
+        .code-container {
+            background-color: #3a3a3a;
+            color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .code-toggle {
+            background-color: #ffcc66;
+            color: #2c2c2c;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .code-toggle:hover {
+            background-color: #ffdb8a;
+        }
+
+        .code-content {
+            display: none;
+            white-space: pre-wrap;
+        }
+
+        .code-preview {
+            white-space: pre-wrap;
+        }
+
+        .breadcrumb {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #FFB703;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #fff;
+        }
+
+        .responsive-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="index.html">Работы</a></li>
+                <li><a href="../diary/index.html">Личный дневник</a></li>
+                <li><a href="../depressive-corner/index.html">Депрессивный уголок</a></li>
+                <li><a href="../experiences/index.html">То, в чём я себя пробовал</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="../index.html">Главная</a> &gt; <a href="index.html">Работы</a> &gt; Работа 1
+        </div>
+
+        <h1>Работа 1</h1>
+        <img src="path/to/image1.jpg" alt="Описание изображения работы 1" class="responsive-image">
+        <p>Подробное описание работы 1. Здесь вы можете рассказать о процессе, используемых технологиях и результатах.</p>
+        
+        <div class="code-container">
+            <div class="code-preview">
+                <code>
+                    // Пример кода
+                    function helloWorld() {
+                        console.log("Hello, world!");
+                    }
+
+                    function add(a, b) {
+                        return a + b;
+                    }
+                </code>
+                <p>... (остальная часть кода скрыта)</p>
+            </div>
+            <button class="code-toggle">Показать полный код</button>
+            <div class="code-content">
+                <code>
+                    // Пример кода
+                    function helloWorld() {
+                        console.log("Hello, world!");
+                    }
+
+                    function add(a, b) {
+                        return a + b;
+                    }
+
+                    const result = add(5, 10);
+                    console.log(result); // 15
+
+                    // Функция для проверки четности
+                    function isEven(num) {
+                        return num % 2 === 0;
+                    }
+
+                    console.log(isEven(4)); // true
+                    console.log(isEven(5)); // false
+                </code>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Мое Портфолио</p>
+        <div>
+            <button id="theme-toggle">Переключить тему</button>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script>
+        const toggleButton = document.querySelector('.code-toggle');
+        const codeContent = document.querySelector('.code-content');
+
+        toggleButton.addEventListener('click', () => {
+            if (codeContent.style.display === 'none' || codeContent.style.display === '') {
+                codeContent.style.display = 'block';
+                toggleButton.textContent = 'Скрыть код';
+            } else {
+                codeContent.style.display = 'none';
+                toggleButton.textContent = 'Показать полный код';
+            }
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+        });
+    </script>
+</body>
+</html>

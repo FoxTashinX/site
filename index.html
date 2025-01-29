@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Портфолио моих работ, личных записей и опыта.">
-    <meta name="keywords" content="портфолио, работы, дневник, опыт">
-    <meta name="author" content="Ваше Имя">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Мое Портфолио</title>
+    <title>Портфолио разработчика</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --bg-color-light: #F5F5DC;
@@ -22,18 +20,52 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
             transition: all 0.3s ease;
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color-dark);
+            background: var(--bg-color-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
         }
 
-        .light-theme {
-            background-color: var(--bg-color-light);
+        .top-nav {
+            background: rgba(107, 78, 61, 0.95);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        nav a:hover {
+            background: rgba(188, 171, 144, 0.1);
+            color: var(--link-hover-color);
+        }
+
+        nav a.active {
+            background: var(--highlight-color);
             color: var(--text-color-light);
         }
 
@@ -44,44 +76,20 @@
         }
 
         header {
-            background: rgba(107, 78, 61, 0.95);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 4rem 0;
+            animation: fadeIn 1.5s ease-in;
         }
 
-        .light-theme header {
-            background: #C2B280;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            list-style: none;
-            padding: 0;
-        }
-
-        nav a {
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
             color: var(--highlight-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            position: relative;
         }
 
-        nav a:hover {
-            color: var(--link-hover-color);
-            background: rgba(188, 171, 144, 0.1);
-        }
-
-        nav a.active {
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-        }
-
-        .gallery {
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             padding: 2rem 0;
         }
@@ -95,8 +103,18 @@
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .project-card h2 {
+            color: var(--link-hover-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-color-dark);
+            margin-bottom: 1.5rem;
         }
 
         .btn {
@@ -106,7 +124,7 @@
             color: var(--text-color-light);
             border-radius: 25px;
             text-decoration: none;
-            margin-top: 1rem;
+            font-weight: bold;
         }
 
         .btn:hover {
@@ -114,135 +132,96 @@
             transform: scale(1.05);
         }
 
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .theme-toggle:hover {
-            background: var(--link-hover-color);
-        }
-
         footer {
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
             margin-top: 4rem;
             border-top: 1px solid var(--highlight-color);
         }
 
-        .form-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+        .social-links {
+            margin-top: 1.5rem;
         }
 
-        .form-container input,
-        .form-container textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid var(--highlight-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: inherit;
+        .social-links a {
+            color: var(--highlight-color);
+            margin: 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .social-links a:hover {
+            color: var(--link-hover-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
             
             nav ul {
-                flex-direction: column;
-                text-align: center;
+                justify-content: center;
+                flex-wrap: wrap;
                 gap: 1rem;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" aria-label="Переключить тему">Тема: Ночь</button>
-
-    <header>
-        <nav>
+    <nav class="top-nav">
+        <div class="nav-container">
             <ul>
-                <li><a href="index.html" class="active">Главная</a></li>
-                <li><a href="works/index.html">Работы</a></li>
-                <li><a href="diary/index.html">Дневник</a></li>
-                <li><a href="depressive-corner/index.html">Уголок</a></li>
-                <li><a href="experiences/index.html">Опыт</a></li>
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="index.html">Работы</a></li>
+                <li><a href="../diary/index.html">Личный дневник</a></li>
+                <li><a href="../depressive-corner/index.html">Дипресивный уголок</a></li>
+                <li><a href="../experiences/index.html">То, в чём я себя пробывал</a></li>
             </ul>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <div class="container">
-        <main>
-            <h1>Добро пожаловать в мое портфолио</h1>
-            <p>Исследуйте мои работы и личные проекты</p>
+        <header>
+            <h1>Мои проекты</h1>
+            <p>Здесь собраны мои лучшие работы в области веб-разработки</p>
+        </header>
 
-            <div class="gallery">
-                <div class="project-card">
-                    <h2>YouTube Канал</h2>
-                    <p>Мои видео-проекты и творческие эксперименты</p>
-                    <a href="https://www.youtube.com/@foxytashin1036" class="btn" target="_blank">Перейти</a>
-                </div>
-
-                <div class="project-card">
-                    <h2>Twitch Трансляции</h2>
-                    <p>Прямые эфиры и интерактивные стримы</p>
-                    <a href="https://www.twitch.tv/foxtashin" class="btn" target="_blank">Перейти</a>
-                </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h2>Проект 1</h2>
+                <p>Интерактивное веб-приложение с использованием React и Node.js. Реализована сложная система аутентификации и实时 обновление данных.</p>
+                <a href="work1.html" class="btn">Посмотреть проект</a>
             </div>
 
-            <div class="form-container">
-                <h2>Свяжитесь со мной</h2>
-                <form>
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="email" placeholder="Ваш email" required>
-                    <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
-                    <button type="submit" class="btn">Отправить</button>
-                </form>
+            <div class="project-card">
+                <h2>Проект 2</h2>
+                <p>Адаптивный лендинг для стартапа с анимациями и кастомной графикой. Оптимизирован для максимальной производительности.</p>
+                <a href="work2.html" class="btn">Посмотреть проект</a>
             </div>
-        </main>
+
+            <div class="project-card">
+                <h2>Проект 3</h2>
+                <p>Интернет-магазин с корзиной покупок и интеграцией платежной системы. Использованы Vue.js и Firebase.</p>
+                <a href="work3.html" class="btn">Посмотреть проект</a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-codepen"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>© 2023 Все права защищены</p>
+        </footer>
     </div>
-
-    <footer>
-        <p>&copy; 2025 Мое Портфолио</p>
-    </footer>
-
-    <script>
-        const themeToggle = document.querySelector('.theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
-        });
-
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.href === window.location.href) {
-                link.classList.add('active');
-            }
-        });
-
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Спасибо за ваше сообщение!');
-            e.target.reset();
-        });
-    </script>
 </body>
 </html>
