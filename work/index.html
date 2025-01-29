@@ -8,121 +8,67 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            /* Светлый режим */
-            --bg-color-light: #94D2BD;
-            --text-color-light: #000000;
-            --bg-color-dark: #005F73;
-            --text-color-dark: #FFFFFF;
-            --highlight-color: #0A9396;
-            --link-hover-color: #EEBB00;
-            --card-bg-light: rgba(255, 255, 255, 0.1);
-            --card-bg-dark: rgba(0, 0, 0, 0.1);
-            --nav-text-color: #000000;
-        }
-
-        [data-theme="dark"] {
-            /* Тёмный режим */
-            --bg-color-light: #001219;
-            --text-color-light: #94D2BD;
-            --bg-color-dark: #0A9396;
-            --text-color-dark: #FFFFFF;
-            --highlight-color: #EEBB00;
-            --link-hover-color: #CA6702;
-            --card-bg-light: rgba(0, 0, 0, 0.1);
-            --card-bg-dark: rgba(255, 255, 255, 0.1);
-            --nav-text-color: #FFFFFF;
+            --bg-color-light: #F5F5DC;
+            --text-color-light: #4A3F35;
+            --bg-color-dark: #8A6642;
+            --text-color-dark: #F0EAD6;
+            --highlight-color: #BCAB90;
+            --link-hover-color: #D2691E;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
             transition: all 0.3s ease;
         }
 
         body {
-            background: var(--bg-color-dark);
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
         }
 
-        .top-nav {
-            background: rgba(10, 147, 150, 0.95);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+        .light-theme {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        header {
+            background: rgba(107, 78, 61, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .light-theme header {
+            background: #C2B280;
         }
 
         nav ul {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             gap: 2rem;
             list-style: none;
+            padding: 0;
         }
 
         nav a {
-            color: var(--nav-text-color);
+            color: var(--highlight-color);
             text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 25px;
-            font-weight: 500;
+            position: relative;
         }
 
         nav a:hover {
-            background: rgba(233, 216, 166, 0.1);
             color: var(--link-hover-color);
+            background: rgba(188, 171, 144, 0.1);
         }
 
         nav a.active {
             background: var(--highlight-color);
             color: var(--text-color-light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            text-align: center;
-            padding: 4rem 0;
-            animation: fadeIn 1.5s ease-in;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--highlight-color);
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .project-card {
-            background: var(--card-bg-light);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--highlight-color);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            background: var(--card-bg-dark);
         }
 
         .theme-toggle {
@@ -141,89 +87,6 @@
         .theme-toggle:hover {
             background: var(--link-hover-color);
         }
-
-        .project-card h2 {
-            color: var(--link-hover-color);
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            color: var(--text-color-dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: var(--link-hover-color);
-            transform: scale(1.05);
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--highlight-color);
-        }
-
-        .social-links {
-            margin-top: 1.5rem;
-        }
-
-        .social-links a {
-            color: var(--highlight-color);
-            margin: 0 1rem;
-            font-size: 1.5rem;
-        }
-
-        .social-links a:hover {
-            color: var(--link-hover-color);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            nav ul {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-        }
-
-        #theme-toggle {
-            background: none;
-            border: none;
-            color: var(--nav-text-color);
-            cursor: pointer;
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            font-family: 'Roboto', sans-serif;
-            border-radius: 25px;
-        }
-
-        #theme-toggle:hover {
-            background: rgba(233, 216, 166, 0.1);
-            color: var(--link-hover-color);
-        }
     </style>
 </head>
 <body>
@@ -235,8 +98,8 @@
                 <li><a href="../index.html">Главная</a></li>
                 <li><a href="index.html">Работы</a></li>
                 <li><a href="../diary/index.html">Личный дневник</a></li>
-                <li><a href="../depressive-corner/index.html">Дипресивный уголок</a></li>
-                <li><a href="../experiences/index.html">То, в чём я себя пробывал</a></li>
+                <li><a href="../depressive-corner/index.html">Депрессивный уголок</a></li>
+                <li><a href="../experiences/index.html">То, в чём я себя пробовал</a></li>
             </ul>
         </nav>
     </header>
