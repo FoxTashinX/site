@@ -10,14 +10,14 @@
         :root {
             /* Светлый режим */
             --bg-color-light: #94D2BD;
-            --text-color-light: #000000; /* Изменено на чёрный */
+            --text-color-light: #000000;
             --bg-color-dark: #005F73;
-            --text-color-dark: #FFFFFF; /* Изменено на белый */
+            --text-color-dark: #FFFFFF;
             --highlight-color: #0A9396;
             --link-hover-color: #EEBB00;
             --card-bg-light: rgba(255, 255, 255, 0.1);
             --card-bg-dark: rgba(0, 0, 0, 0.1);
-            --nav-text-color: #000000; /* Новая переменная для навигации */
+            --nav-text-color: #000000;
         }
 
         [data-theme="dark"] {
@@ -25,12 +25,12 @@
             --bg-color-light: #001219;
             --text-color-light: #94D2BD;
             --bg-color-dark: #0A9396;
-            --text-color-dark: #FFFFFF; /* Изменено на белый */
+            --text-color-dark: #FFFFFF;
             --highlight-color: #EEBB00;
             --link-hover-color: #CA6702;
             --card-bg-light: rgba(0, 0, 0, 0.1);
             --card-bg-dark: rgba(255, 255, 255, 0.1);
-            --nav-text-color: #FFFFFF; /* Новая переменная для навигации */
+            --nav-text-color: #FFFFFF;
         }
 
         * {
@@ -70,7 +70,7 @@
         }
 
         nav a {
-            color: var(--nav-text-color); /* Используем новую переменную */
+            color: var(--nav-text-color);
             text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 25px;
@@ -87,12 +87,129 @@
             color: var(--text-color-light);
         }
 
-        /* Остальные стили остаются без изменений */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
+        header {
+            text-align: center;
+            padding: 4rem 0;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--highlight-color);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .project-card {
+            background: var(--card-bg-light);
+            border-radius: 15px;
+            padding: 1.5rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--highlight-color);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            background: var(--card-bg-dark);
+        }
+
+        .project-card h2 {
+            color: var(--link-hover-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: var(--text-color-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--highlight-color);
+            color: var(--text-color-light);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: var(--link-hover-color);
+            transform: scale(1.05);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--highlight-color);
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--highlight-color);
+            margin: 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        .social-links a:hover {
+            color: var(--link-hover-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+
+        #theme-toggle {
+            background: none;
+            border: none;
+            color: var(--nav-text-color);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-family: 'Roboto', sans-serif;
+            border-radius: 25px;
+        }
+
+        #theme-toggle:hover {
+            background: rgba(233, 216, 166, 0.1);
+            color: var(--link-hover-color);
+        }
     </style>
 </head>
 <body>
-    <!-- Остальная разметка без изменений -->
     <nav class="top-nav">
         <div class="nav-container">
             <ul>
@@ -106,7 +223,40 @@
         </div>
     </nav>
 
-    <!-- Остальная часть HTML без изменений -->
+    <div class="container">
+        <header>
+            <h1>Мои проекты</h1>
+            <p>Здесь собраны мои лучшие работы в области веб-разработки</p>
+        </header>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <h2>Проект 1</h2>
+                <p>Бот управляющий через ТГ вашим ПК.</p>
+                <a href="work1.html" class="btn">Посмотреть проект</a>
+            </div>
+
+            <div class="project-card">
+                <h2>Проект 2</h2>
+                <p>Адаптивный лендинг для стартапа с анимациями и кастомной графикой. Оптимизирован для максимальной производительности.</p>
+                <a href="work2.html" class="btn">Посмотреть проект</a>
+            </div>
+
+            <div class="project-card">
+                <h2>Проект 3</h2>
+                <p>Интернет-магазин с корзиной покупок и интеграцией платежной системы. Использованы Vue.js и Firebase.</p>
+                <a href="work3.html" class="btn">Посмотреть проект</a>
+            </div>
+        </div>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://github.com/FoxTashinX"><i class="fab fa-github"></i></a>
+                <a href="https://www.youtube.com/@foxytashin1036"><i class="fa fa-youtube-play"></i></a>
+            </div>
+            <p>© 2025 Все права защищены</p>
+        </footer>
+    </div>
 
     <script>
         const toggleButton = document.getElementById('theme-toggle');
