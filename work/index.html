@@ -7,172 +7,172 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --bg-color-light: #F5F5DC;
-            --text-color-light: #4A3F35;
-            --bg-color-dark: #8A6642;
-            --text-color-dark: #F0EAD6;
-            --highlight-color: #BCAB90;
-            --link-hover-color: #D2691E;
-        }
+      :root {
+    --bg-color-light: #001219;
+    --text-color-light: #005F73;
+    --bg-color-dark: #0A9396;
+    --text-color-dark: #94D2BD;
+    --highlight-color: #E9D8A6;
+    --link-hover-color: #EEBB00;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
-            transition: all 0.3s ease;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease;
+}
 
-        body {
-            background: var(--bg-color-dark);
-            color: var(--text-color-dark);
-            line-height: 1.6;
-        }
+body {
+    background: var(--bg-color-dark);
+    color: var(--text-color-dark);
+    line-height: 1.6;
+}
 
-        .top-nav {
-            background: rgba(107, 78, 61, 0.95);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
+.top-nav {
+    background: rgba(10, 147, 150, 0.95); /* Используем --bg-color-dark с прозрачностью */
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
 
-        nav ul {
-            display: flex;
-            justify-content: flex-end;
-            gap: 2rem;
-            list-style: none;
-        }
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    list-style: none;
+}
 
-        nav a {
-            color: var(--highlight-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-        }
+nav a {
+    color: var(--highlight-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+}
 
-        nav a:hover {
-            background: rgba(188, 171, 144, 0.1);
-            color: var(--link-hover-color);
-        }
+nav a:hover {
+    background: rgba(233, 216, 166, 0.1); /* Используем --highlight-color с прозрачностью */
+    color: var(--link-hover-color);
+}
 
-        nav a.active {
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-        }
+nav a.active {
+    background: var(--highlight-color);
+    color: var(--text-color-light);
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
 
-        header {
-            text-align: center;
-            padding: 4rem 0;
-            animation: fadeIn 1.5s ease-in;
-        }
+header {
+    text-align: center;
+    padding: 4rem 0;
+    animation: fadeIn 1.5s ease-in;
+}
 
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--highlight-color);
-        }
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: var(--highlight-color);
+}
 
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
 
-        .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--highlight-color);
-        }
+.project-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--highlight-color);
+}
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-        }
+.project-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.15);
+}
 
-        .project-card h2 {
-            color: var(--link-hover-color);
-            margin-bottom: 1rem;
-        }
+.project-card h2 {
+    color: var(--link-hover-color);
+    margin-bottom: 1rem;
+}
 
-        .project-card p {
-            color: var(--text-color-dark);
-            margin-bottom: 1.5rem;
-        }
+.project-card p {
+    color: var(--text-color-dark);
+    margin-bottom: 1.5rem;
+}
 
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: var(--highlight-color);
+    color: var(--text-color-light);
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        .btn:hover {
-            background: var(--link-hover-color);
-            transform: scale(1.05);
-        }
+.btn:hover {
+    background: var(--link-hover-color);
+    transform: scale(1.05);
+}
 
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--highlight-color);
-        }
+footer {
+    text-align: center;
+    padding: 3rem 0;
+    margin-top: 4rem;
+    border-top: 1px solid var(--highlight-color);
+}
 
-        .social-links {
-            margin-top: 1.5rem;
-        }
+.social-links {
+    margin-top: 1.5rem;
+}
 
-        .social-links a {
-            color: var(--highlight-color);
-            margin: 0 1rem;
-            font-size: 1.5rem;
-        }
+.social-links a {
+    color: var(--highlight-color);
+    margin: 0 1rem;
+    font-size: 1.5rem;
+}
 
-        .social-links a:hover {
-            color: var(--link-hover-color);
-        }
+.social-links a:hover {
+    color: var(--link-hover-color);
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            nav ul {
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-        }
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -217,7 +217,7 @@
         <footer>
             <div class="social-links">
                 <a href="https://github.com/FoxTashinX"><i class="fab fa-github"></i></a>
-                <a href="https://www.youtube.com/@foxytashin1036"><i class="fab fa-youtube-play"></i></a>
+                <a href="https://www.youtube.com/@foxytashin1036"><i class="fa fa-youtube-play"></i></a>
             </div>
             <p>© 2025 Все права защищены</p>
         </footer>
