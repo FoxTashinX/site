@@ -160,6 +160,48 @@
                 gap: 1rem;
             }
         }
+
+        /* Стили для переключения темы */
+        :root {
+            --bg-color-light: #F5F5DC;
+            --text-color-light: #4A3F35;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--highlight-color);
+            color: var(--text-color-light);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: var(--link-hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        body.light-theme {
+            background: var(--bg-color-light);
+            color: var(--text-color-light);
+        }
+
+        .light-theme nav a {
+            color: var(--text-color-light);
+        }
+
+        .light-theme .project-card {
+            background: rgba(255,255,255,0.9);
+            border-color: var(--text-color-light);
+        }
     </style>
 </head>
 <body>
@@ -232,6 +274,9 @@
         </div>
     </footer>
 
+    <!-- HTML для кнопки переключения темы -->
+    <button class="theme-toggle" aria-label="Переключить тему">Тема: Ночь</button>
+
     <script>
         const toggleButton = document.querySelector('.code-toggle');
         const codeContent = document.querySelector('.code-content');
@@ -246,9 +291,38 @@
             }
         });
 
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
+        // Скрипт переключения темы
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const savedTheme = localStorage.getItem('theme');
+            
+            // Восстановление темы из localStorage
+            if (savedTheme) {
+                document.body.classList.add(savedTheme);
+                themeToggle.textContent = savedTheme === 'light-theme' 
+                    ? 'Тема: День' 
+                    : 'Тема: Ночь';
+            }
+
+            // Обработчик клика
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-theme');
+                const isLight = document.body.classList.contains('light-theme');
+                
+                // Сохранение в localStorage
+                localStorage.setItem('theme', isLight ? 'light-theme' : '');
+                
+                // Обновление текста кнопки
+                themeToggle.textContent = isLight 
+                    ? 'Тема: День' 
+                    : 'Тема: Ночь';
+                    
+                // Анимация кнопки
+                themeToggle.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    themeToggle.style.transform = 'scale(1)';
+                }, 100);
+            });
         });
     </script>
 </body>
