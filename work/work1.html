@@ -229,39 +229,212 @@
         <div class="code-container">
             <div class="code-preview">
                 <code>
-                    // Пример кода
-                    function helloWorld() {
-                        console.log("Hello, world!");
-                    }
+                    import logging
+                    import asyncio
+                    import os
+                    from aiogram import Bot, Dispatcher, types
+                    from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+                    from aiogram.filters import Command
 
-                    function add(a, b) {
-                        return a + b;
-                    }
+                    # Ваш токен бота
+                    API_TOKEN = 'код бота'
+
+                    # ID разрешенного пользователя
+                    ALLOWED_USER_ID = 123
+
+                    # Настройка логирования
+                    logging.basicConfig(level=logging.INFO)
+                    logging.getLogger('aiogram.event').setLevel(logging.WARNING)  # Скрытие системных логов aiogram.event
+                    bot = Bot(token=API_TOKEN)
+                    dp = Dispatcher()
                 </code>
                 <p>... (остальная часть кода скрыта)</p>
             </div>
             <button class="code-toggle">Показать полный код</button>
             <div class="code-content">
                 <code>
-                    // Пример кода
-                    function helloWorld() {
-                        console.log("Hello, world!");
-                    }
+                    import logging
+import asyncio
+import os
+from aiogram import Bot, Dispatcher, types
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
+from aiogram.filters import Command
 
-                    function add(a, b) {
-                        return a + b;
-                    }
+# Ваш токен бота
+API_TOKEN = 'код бота'
 
-                    const result = add(5, 10);
-                    console.log(result); // 15
+# ID разрешенного пользователя
+ALLOWED_USER_ID = 123
 
-                    // Функция для проверки четности
-                    function isEven(num) {
-                        return num % 2 === 0;
-                    }
+# Настройка логирования
+logging.basicConfig(level=logging.INFO)
+logging.getLogger('aiogram.event').setLevel(logging.WARNING)  # Скрытие системных логов aiogram.event
 
-                    console.log(isEven(4)); // true
-                    console.log(isEven(5)); // false
+# Создание экземпляра бота и диспетчера
+bot = Bot(token=API_TOKEN)
+dp = Dispatcher()
+
+# Функция для сохранения сообщений в файл
+def save_message_to_history(user_id, message):
+    file_name = f"history_{user_id}.txt"
+    with open(file_name, "a", encoding="utf-8") as file:
+        file.write(message + "\n")
+
+# Функция для запуска программы на ПК
+def open_program(program_path):
+    try:
+        os.startfile(program_path)
+        return "Программа успешно запущена!"
+    except Exception as e:
+        return f"Не удалось запустить программу: {e}"
+
+# Функция для блокировки ПК
+def lock_pc():
+    try:
+        os.system("rundll32.exe user32.dll,LockWorkStation")
+        return "ПК заблокирован успешно!"
+    except Exception as e:
+        return f"Не удалось заблокировать ПК: {e}"
+
+# Функция для выключения ПК
+def shutdown_pc():
+    try:
+        os.system("shutdown /s /t 1")
+        return "ПК будет выключен через несколько секунд."
+    except Exception as e:
+        return f"Не удалось выключить ПК: {e}"
+
+# Функция для перезагрузки ПК
+def reboot_pc():
+    try:
+        os.system("shutdown /r /t 1")
+        return "ПК будет перезагружен через несколько секунд."
+    except Exception as e:
+        return f"Не удалось перезагрузить ПК: {e}"
+
+# Middleware для проверки доступа
+async def access_check(message: types.Message):
+    if message.from_user.id != ALLOWED_USER_ID:
+        await message.answer("У вас нет доступа к этому боту.")
+        raise PermissionError(f"Доступ запрещен для пользователя {message.from_user.id}")
+
+# Создаем меню быстрого доступа
+def create_main_menu():
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Открыть Блокнот")],
+            [KeyboardButton(text="Открыть Калькулятор")],
+            [KeyboardButton(text="Заблокировать ПК")],
+            [KeyboardButton(text="Выключить ПК")],
+            [KeyboardButton(text="Перезагрузить ПК")]
+        ],
+        resize_keyboard=True
+    )
+    return keyboard
+
+# Обработчик команды /start
+@dp.message(Command("start"))
+async def start_command(message: types.Message):
+    await access_check(message)
+
+    user_id = message.from_user.id
+    start_message = (
+        "Привет! Это ваш бот. Вы можете использовать меню быстрого доступа для выполнения действий."
+    )
+    keyboard = create_main_menu()
+    print(f"[Пользователь {user_id}] сообщение: {message.text}")  # Вывод сообщения пользователя
+    await message.answer(start_message, reply_markup=keyboard)
+    save_message_to_history(user_id, f"Бот: {start_message}")
+
+# Обработчик команды "Открыть Блокнот"
+@dp.message(lambda message: message.text == "Открыть Блокнот")
+async def open_notepad(message: types.Message):
+    await access_check(message)
+
+    user_id = message.from_user.id
+    result = open_program("notepad.exe")
+    print(f"[Бот] сообщение: {result}")
+    await message.answer(result)
+    save_message_to_history(user_id, f"Бот: {result}")
+
+# Обработчик команды "Открыть Калькулятор"
+@dp.message(lambda message: message.text == "Открыть Калькулятор")
+async def open_calculator(message: types.Message):
+    await access_check(message)
+
+    user_id = message.from_user.id
+    result = open_program("calc.exe")
+    print(f"[Бот] сообщение: {result}")
+    await message.answer(result)
+    save_message_to_history(user_id, f"Бот: {result}")
+
+# Обработчик команды "Заблокировать ПК"
+@dp.message(lambda message: message.text == "Заблокировать ПК")
+async def lock_pc_command(message: types.Message):
+    await access_check(message)
+
+    user_id = message.from_user.id
+    result = lock_pc()
+    print(f"[Бот] сообщение: {result}")
+    await message.answer(result)
+    save_message_to_history(user_id, f"Бот: {result}")
+
+# Обработчик команды "Выключить ПК"
+@dp.message(lambda message: message.text == "Выключить ПК")
+async def shutdown_pc_command(message: types.Message):
+    await access_check(message)
+
+    user_id = message.from_user.id
+    result = shutdown_pc()
+    print(f"[Бот] сообщение: {result}")
+    await message.answer(result)
+    save_message_to_history(user_id, f"Бот: {result}")
+
+# Обработчик команды "Перезагрузить ПК"
+@dp.message(lambda message: message.text == "Перезагрузить ПК")
+async def reboot_pc_command(message: types.Message):
+    await access_check(message)
+
+    user_id = message.from_user.id
+    result = reboot_pc()
+    print(f"[Бот] сообщение: {result}")
+    await message.answer(result)
+    save_message_to_history(user_id, f"Бот: {result}")
+
+# Обработчик команды /stop
+@dp.message(Command("stop"))
+async def stop_command(message: types.Message):
+    await access_check(message)
+
+    user_id = message.from_user.id
+    print(f"[Пользователь {user_id}] сообщение: {message.text}")  # Вывод сообщения пользователя
+    stop_message = "Бот завершает работу. До свидания!"
+    print(f"[Бот] сообщение: {stop_message}")
+    await message.answer(stop_message)
+    save_message_to_history(user_id, f"Бот: {stop_message}")
+
+    # Завершаем работу бота
+    await bot.session.close()
+    await dp.stop_polling()
+
+# Обработчик любых сообщений (для логирования)
+@dp.message()
+async def log_user_message(message: types.Message):
+    user_id = message.from_user.id
+    if message.text:
+        print(f"[Пользователь {user_id}] сообщение: {message.text}")  # Вывод всех сообщений пользователя
+        save_message_to_history(user_id, f"Пользователь: {message.text}")
+
+# Главная функция запуска бота
+async def main():
+    try:
+        print("Бот запущен. Ожидание сообщений...")
+        await dp.start_polling(bot)
+    except Exception as e:
+        logging.error(f"Ошибка при запуске бота: {e}")
+
+if __name__ == '__main__':
+    asyncio.run(main())
                 </code>
             </div>
         </div>
