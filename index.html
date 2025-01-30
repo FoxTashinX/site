@@ -243,6 +243,43 @@
             alert('Спасибо за ваше сообщение!');
             e.target.reset();
         });
+
+        // Класс Tentacle
+        class Segment {
+            constructor(parent, length, angle, isFirst) {
+                this.parent = parent;
+                this.length = length;
+                this.angle = angle;
+                this.isFirst = isFirst;
+            }
+
+            // Метод для рисования сегмента или добавления визуализации
+            draw() {
+                // Логика рисования сегмента
+            }
+        }
+
+        class Tentacle {
+            constructor(x, y, l, n, a) {
+                this.x = x;
+                this.y = y;
+                this.l = l;
+                this.n = n;
+                this.t = {};
+                this.rand = Math.random();
+                this.segments = [new Segment(this, this.l / this.n, 0, true)];
+                for (let i = 1; i < this.n; i++) {
+                    this.segments.push(
+                        new Segment(this.segments[i - 1], this.l / this.n, 0, false)
+                    );
+                }
+            }
+
+            // Метод для анимации или обновления состояния щупальца
+            update() {
+                // Логика обновления
+            }
+        }
     </script>
 </body>
 </html>
