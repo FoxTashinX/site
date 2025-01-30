@@ -10,10 +10,10 @@
     <title>Мое Портфолио</title>
     <style>
         :root {
-            --bg-color-light: #F5F5DC;
-            --text-color-light: #4A3F35;
-            --bg-color-dark: #8A6642;
-            --text-color-dark: #F0EAD6;
+            --bg-gradient-dark: linear-gradient(135deg, black, darkgreen);
+            --text-color-dark: orange;
+            --bg-gradient-light: linear-gradient(135deg, lightgray, orange);
+            --text-color-light: green;
             --highlight-color: #BCAB90;
             --link-hover-color: #D2691E;
         }
@@ -27,13 +27,13 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color-dark);
+            background: var(--bg-gradient-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
         }
 
         .light-theme {
-            background-color: var(--bg-color-light);
+            background: var(--bg-gradient-light);
             color: var(--text-color-light);
         }
 
@@ -74,44 +74,11 @@
             background: rgba(188, 171, 144, 0.1);
         }
 
-        nav a.active {
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-        }
-
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             padding: 2rem 0;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--highlight-color);
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 1rem;
-        }
-
-        .btn:hover {
-            background: var(--link-hover-color);
-            transform: scale(1.05);
         }
 
         .theme-toggle {
@@ -137,41 +104,6 @@
             margin-top: 4rem;
             border-top: 1px solid var(--highlight-color);
         }
-
-        .form-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-        }
-
-        .form-container input,
-        .form-container textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid var(--highlight-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: inherit;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
@@ -190,34 +122,8 @@
     </header>
 
     <div class="container">
-        <main>
-            <h1>Добро пожаловать в мое портфолио</h1>
-            <p>Исследуйте мои работы и личные проекты</p>
-
-            <div class="gallery">
-                <div class="project-card">
-                    <h2>YouTube Канал</h2>
-                    <p>Мои видео-проекты и творческие эксперименты</p>
-                    <a href="https://www.youtube.com/@foxytashin1036" class="btn" target="_blank">Перейти</a>
-                </div>
-
-                <div class="project-card">
-                    <h2>Twitch Трансляции</h2>
-                    <p>Прямые эфиры и интерактивные стримы</p>
-                    <a href="https://www.twitch.tv/foxtashin" class="btn" target="_blank">Перейти</a>
-                </div>
-            </div>
-
-            <div class="form-container">
-                <h2>Свяжитесь со мной</h2>
-                <form>
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="email" placeholder="Ваш email" required>
-                    <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
-                    <button type="submit" class="btn">Отправить</button>
-                </form>
-            </div>
-        </main>
+        <h1>Добро пожаловать в мое портфолио</h1>
+        <p>Исследуйте мои работы и личные проекты</p>
     </div>
 
     <footer>
@@ -230,18 +136,6 @@
             document.body.classList.toggle('light-theme');
             const isLight = document.body.classList.contains('light-theme');
             themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
-        });
-
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.href === window.location.href) {
-                link.classList.add('active');
-            }
-        });
-
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Спасибо за ваше сообщение!');
-            e.target.reset();
         });
     </script>
 </body>
