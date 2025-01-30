@@ -297,32 +297,36 @@
 
             // Метод для обновления состояния и рисования щупальца
             update(ctx) {
-                for (let i = 0; i < this.n; i++) {
+                for (let i = 0; i < this.segments.length; i++) {
                     this.segments[i].draw(ctx);
                 }
             }
         }
 
+        // Установка канваса
         const canvas = document.getElementById('tentacleCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        let tentacle = new Tentacle(300, 300, 200, 10, 0);
+        // Инициализация щупальца
+        const tentacle = new Tentacle(window.innerWidth / 2, window.innerHeight / 2, 200, 15, 0);
 
-        // Обработчик движения мыши
+        // Отслеживание мыши
         document.addEventListener('mousemove', (e) => {
-            tentacle = new Tentacle(e.x, e.y, 200, 10, 0);
+            const dx = e.clientX - window.innerWidth / 2;
+            const dy = e.clientY - window.innerHeight / 2;
+            tentacle.angle = Math.atan2(dy, dx);
         });
 
         // Анимация
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);  // Очищаем канвас
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             tentacle.update(ctx);
             requestAnimationFrame(animate);
         }
 
-        animate();  // Запускаем анимацию
+        animate();
     </script>
 </body>
 </html>
