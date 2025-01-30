@@ -9,20 +9,24 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Мое Портфолио</title>
     <style>
-        :root {
-            --bg-color-light: #F5F5DC;
-            --text-color-light: #4A3F35;
-            --bg-color-dark: #8A6642;
-            --text-color-dark: #F0EAD6;
-            --highlight-color: #BCAB90;
-            --link-hover-color: #D2691E;
+        /* Стили для щупалец */
+        .tentacle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #BCAB90;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: shrink 1s infinite alternate;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
+        @keyframes shrink {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0.5);
+            }
         }
 
         body {
@@ -30,148 +34,7 @@
             background-color: var(--bg-color-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
-            overflow: hidden;
-        }
-
-        .light-theme {
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            background: rgba(107, 78, 61, 0.95);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .light-theme header {
-            background: #C2B280;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            list-style: none;
-            padding: 0;
-        }
-
-        nav a {
-            color: var(--highlight-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            position: relative;
-        }
-
-        nav a:hover {
-            color: var(--link-hover-color);
-            background: rgba(188, 171, 144, 0.1);
-        }
-
-        nav a.active {
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--highlight-color);
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 1rem;
-        }
-
-        .btn:hover {
-            background: var(--link-hover-color);
-            transform: scale(1.05);
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .theme-toggle:hover {
-            background: var(--link-hover-color);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--highlight-color);
-        }
-
-        .form-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-        }
-
-        .form-container input,
-        .form-container textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid var(--highlight-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: inherit;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-            
-            .gallery {
-                grid-template-columns: 1fr;
-            }
+            overflow: hidden; /* Убираем полосу прокрутки */
         }
     </style>
 </head>
@@ -225,8 +88,6 @@
         <p>&copy; 2025 Мое Портфолио</p>
     </footer>
 
-    <canvas id="tentacleCanvas"></canvas>
-
     <script>
         const themeToggle = document.querySelector('.theme-toggle');
         themeToggle.addEventListener('click', () => {
@@ -247,86 +108,31 @@
             e.target.reset();
         });
 
-        // Класс Segment
-        class Segment {
-            constructor(parent, length, angle, isFirst) {
-                this.parent = parent;
-                this.length = length;
-                this.angle = angle;
-                this.isFirst = isFirst;
-                this.x = parent.x;
-                this.y = parent.y;
-            }
+        // Код для создания щупалец
+        const numTentacles = 10; // Количество щупалец
+        let tentacles = [];
 
-            // Метод для рисования сегмента
-            draw(ctx) {
-                const x2 = this.x + Math.cos(this.angle) * this.length;
-                const y2 = this.y + Math.sin(this.angle) * this.length;
-
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                ctx.lineTo(x2, y2);
-                ctx.stroke();
-
-                if (this.isFirst) {
-                    ctx.beginPath();
-                    ctx.arc(x2, y2, 5, 0, 2 * Math.PI);
-                    ctx.fill();
-                }
-
-                this.x = x2;
-                this.y = y2;
-            }
+        for (let i = 0; i < numTentacles; i++) {
+            let tentacle = document.createElement('div');
+            tentacle.classList.add('tentacle');
+            document.body.appendChild(tentacle);
+            tentacles.push(tentacle);
         }
 
-        // Класс Tentacle
-        class Tentacle {
-            constructor(x, y, l, n, a) {
-                this.x = x;
-                this.y = y;
-                this.l = l;
-                this.n = n;
-                this.angle = a;
-                this.segments = [new Segment(this, this.l / this.n, 0, true)];
-                for (let i = 1; i < this.n; i++) {
-                    this.segments.push(
-                        new Segment(this.segments[i - 1], this.l / this.n, this.angle, false)
-                    );
-                }
-            }
+        // Функция для движения щупалец за мышью
+        document.addEventListener('mousemove', (event) => {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
 
-            // Метод для обновления состояния и рисования щупальца
-            update(ctx) {
-                for (let i = 0; i < this.segments.length; i++) {
-                    this.segments[i].draw(ctx);
-                }
-            }
-        }
+            tentacles.forEach((tentacle, index) => {
+                const angle = (index / numTentacles) * Math.PI * 2; // Разделяем угол для щупалец
+                const offsetX = Math.cos(angle) * 50; // Расстояние от центра для каждого щупальца
+                const offsetY = Math.sin(angle) * 50;
 
-        // Установка канваса
-        const canvas = document.getElementById('tentacleCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        // Инициализация щупальца
-        const tentacle = new Tentacle(window.innerWidth / 2, window.innerHeight / 2, 200, 15, 0);
-
-        // Отслеживание мыши
-        document.addEventListener('mousemove', (e) => {
-            const dx = e.clientX - window.innerWidth / 2;
-            const dy = e.clientY - window.innerHeight / 2;
-            tentacle.angle = Math.atan2(dy, dx);
+                tentacle.style.left = `${mouseX + offsetX}px`;
+                tentacle.style.top = `${mouseY + offsetY}px`;
+            });
         });
-
-        // Анимация
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            tentacle.update(ctx);
-            requestAnimationFrame(animate);
-        }
-
-        animate();
     </script>
 </body>
 </html>
