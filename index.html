@@ -30,6 +30,7 @@
             background-color: var(--bg-color-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
+            overflow: hidden;
         }
 
         .light-theme {
@@ -224,6 +225,8 @@
         <p>&copy; 2025 Мое Портфолио</p>
     </footer>
 
+    <canvas id="tentacleCanvas"></canvas>
+
     <script>
         const themeToggle = document.querySelector('.theme-toggle');
         themeToggle.addEventListener('click', () => {
@@ -244,42 +247,82 @@
             e.target.reset();
         });
 
-        // Класс Tentacle
+        // Класс Segment
         class Segment {
             constructor(parent, length, angle, isFirst) {
                 this.parent = parent;
                 this.length = length;
                 this.angle = angle;
                 this.isFirst = isFirst;
+                this.x = parent.x;
+                this.y = parent.y;
             }
 
-            // Метод для рисования сегмента или добавления визуализации
-            draw() {
-                // Логика рисования сегмента
+            // Метод для рисования сегмента
+            draw(ctx) {
+                const x2 = this.x + Math.cos(this.angle) * this.length;
+                const y2 = this.y + Math.sin(this.angle) * this.length;
+
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+
+                if (this.isFirst) {
+                    ctx.beginPath();
+                    ctx.arc(x2, y2, 5, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+
+                this.x = x2;
+                this.y = y2;
             }
         }
 
+        // Класс Tentacle
         class Tentacle {
             constructor(x, y, l, n, a) {
                 this.x = x;
                 this.y = y;
                 this.l = l;
                 this.n = n;
-                this.t = {};
-                this.rand = Math.random();
+                this.angle = a;
                 this.segments = [new Segment(this, this.l / this.n, 0, true)];
                 for (let i = 1; i < this.n; i++) {
                     this.segments.push(
-                        new Segment(this.segments[i - 1], this.l / this.n, 0, false)
+                        new Segment(this.segments[i - 1], this.l / this.n, this.angle, false)
                     );
                 }
             }
 
-            // Метод для анимации или обновления состояния щупальца
-            update() {
-                // Логика обновления
+            // Метод для обновления состояния и рисования щупальца
+            update(ctx) {
+                for (let i = 0; i < this.n; i++) {
+                    this.segments[i].draw(ctx);
+                }
             }
         }
+
+        const canvas = document.getElementById('tentacleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let tentacle = new Tentacle(300, 300, 200, 10, 0);
+
+        // Обработчик движения мыши
+        document.addEventListener('mousemove', (e) => {
+            tentacle = new Tentacle(e.x, e.y, 200, 10, 0);
+        });
+
+        // Анимация
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);  // Очищаем канвас
+            tentacle.update(ctx);
+            requestAnimationFrame(animate);
+        }
+
+        animate();  // Запускаем анимацию
     </script>
 </body>
 </html>
