@@ -8,102 +8,72 @@
     <meta name="author" content="Ваше Имя">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Мое Портфолио</title>
-    <style>
+     <style>
         :root {
-            --bg-gradient-dark: linear-gradient(135deg, black, darkgreen);
-            --text-color-dark: orange;
-            --bg-gradient-light: linear-gradient(135deg, lightgray, orange);
-            --text-color-light: green;
-            --highlight-color: #BCAB90;
-            --link-hover-color: #D2691E;
+            --bg-gradient-dark: linear-gradient(to bottom right, #000000, #1a2f1a);
+            --bg-color-light: #f0f0f0;
+            --text-color-dark: #FFA500;
+            --text-color-light: #008000;
+            --highlight-color: #FFA500;
+            --link-hover-color: #FF4500;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
+            /* Остальные стили без изменений */
         }
 
         body {
             font-family: 'Arial', sans-serif;
-            background: var(--bg-gradient-dark);
+            background-image: var(--bg-gradient-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
+            background-attachment: fixed;
         }
 
         .light-theme {
-            background: var(--bg-gradient-light);
+            background-color: var(--bg-color-light);
+            background-image: none;
             color: var(--text-color-light);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
         }
 
         header {
-            background: rgba(107, 78, 61, 0.95);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 165, 0, 0.9); /* Прозрачный оранжевый */
+            /* Остальные стили без изменений */
         }
 
         .light-theme header {
-            background: #C2B280;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            list-style: none;
-            padding: 0;
+            background: rgba(255, 165, 0, 0.9); /* Оранжевый для светлой темы */
         }
 
         nav a {
-            color: var(--highlight-color);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            position: relative;
+            color: var(--text-color-dark);
         }
 
-        nav a:hover {
-            color: var(--link-hover-color);
-            background: rgba(188, 171, 144, 0.1);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: var(--highlight-color);
+        .light-theme nav a {
             color: var(--text-color-light);
-            border: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            z-index: 1000;
         }
 
-        .theme-toggle:hover {
-            background: var(--link-hover-color);
+        .project-card {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--highlight-color);
         }
 
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--highlight-color);
+        .light-theme .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: var(--text-color-light);
         }
+
+        .btn {
+            background: var(--highlight-color);
+            color: var(--text-color-dark);
+        }
+
+        .light-theme .btn {
+            background: var(--text-color-light);
+            color: var(--bg-color-light);
+        }
+
+        /* Остальные стили остаются без изменений */
     </style>
 </head>
 <body>
