@@ -236,6 +236,58 @@
         margin: 0;
         font-size: 20px;
     }
+
+    /* Стили для темной темы */
+    body {
+        background-color: var(--bg-color-dark);
+        color: var(--text-color-dark);
+    }
+
+    .light-theme body {
+        background-color: var(--bg-color-light);
+        color: var(--text-color-light);
+    }
+
+    .month {
+        background-color: var(--bg-color-light); /* Светлый фон для месяца */
+        border: 1px solid var(--highlight-color);
+    }
+
+    .month h2 {
+        color: var(--text-color-dark);
+    }
+
+    .day {
+        background-color: var(--bg-color-light); /* Светлый фон для дней */
+        color: var(--text-color-dark);
+    }
+
+    .day:hover {
+        background-color: var(--link-hover-color);
+        color: var(--text-color-light);
+    }
+
+    /* Для светлой темы */
+    .light-theme .month {
+        background-color: var(--bg-color-dark); /* Темный фон для месяца */
+        color: var(--text-color-light);
+    }
+
+    .light-theme .day {
+        background-color: var(--bg-color-dark); /* Темный фон для дней */
+        color: var(--text-color-light);
+    }
+
+    .light-theme .day:hover {
+        background-color: var(--highlight-color);
+        color: var(--text-color-dark);
+    }
+
+    /* Подсветка активного дня */
+    .day.selected {
+        background-color: var(--highlight-color);
+        color: var(--text-color-light);
+    }
 </style>
 </head>
 <body>
@@ -270,30 +322,30 @@
             const calendarElement = document.getElementById('calendar');
             const dayInfoElement = document.getElementById('day-info');
             const selectedDateElement = document.getElementById('selected-date');
-
+    
             // Функция для генерации календаря на месяц
             function generateMonth(year, month) {
                 const daysInMonth = new Date(year, month + 1, 0).getDate();
                 const firstDay = new Date(year, month, 1).getDay(); // День недели для 1-го числа месяца
-
+    
                 const monthElement = document.createElement('div');
                 monthElement.classList.add('month');
-
+    
                 const monthName = new Date(year, month).toLocaleString('ru-RU', { month: 'long' });
                 const monthTitle = document.createElement('h2');
                 monthTitle.textContent = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
                 monthElement.appendChild(monthTitle);
-
+    
                 const daysContainer = document.createElement('div');
                 daysContainer.classList.add('days');
-
+    
                 // Добавляем пустые ячейки до первого дня месяца
                 for (let i = 0; i < firstDay; i++) {
                     const emptyCell = document.createElement('div');
                     emptyCell.classList.add('day', 'disabled');
                     daysContainer.appendChild(emptyCell);
                 }
-
+    
                 // Добавляем дни месяца
                 for (let day = 1; day <= daysInMonth; day++) {
                     const dayElement = document.createElement('div');
@@ -302,31 +354,32 @@
                     dayElement.addEventListener('click', () => showDayInfo(day, monthName, year));
                     daysContainer.appendChild(dayElement);
                 }
-
+    
                 monthElement.appendChild(daysContainer);
                 return monthElement;
             }
-
+    
             // Функция для отображения информации о выбранной дате
             function showDayInfo(day, monthName, year) {
                 selectedDateElement.textContent = `Вы выбрали: ${day} ${monthName} ${year}`;
                 dayInfoElement.classList.remove('hidden');
             }
-
+    
             // Генерация календаря для всех месяцев
             const currentYear = new Date().getFullYear();
-
+    
             for (let month = 0; month < 12; month++) {
                 const monthCalendar = generateMonth(currentYear, month);
                 calendarElement.appendChild(monthCalendar);
             }
-        });
-
-        const themeToggle = document.querySelector('.theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
+    
+            // Смена темы
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-theme');
+                const isLight = document.body.classList.contains('light-theme');
+                themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
+            });
         });
     </script>
 </body>
