@@ -30,7 +30,7 @@
             background-color: var(--bg-color-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
-            overflow: hidden;
+            overflow-y: auto; /* Разрешаем вертикальную прокрутку */
             position: relative;
             font-size: 16px;
         }
@@ -47,6 +47,7 @@
             background-color: white;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
+            overflow-y: auto; /* Разрешаем прокрутку внутри контейнера */
         }
 
         header {
@@ -167,6 +168,8 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+            max-height: 500px; /* Ограничиваем высоту календаря */
+            overflow-y: auto; /* Разрешаем вертикальную прокрутку, если контента больше */
         }
 
         .month {
