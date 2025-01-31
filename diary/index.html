@@ -1,1 +1,140 @@
-123
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный дневник</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #calendar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .day {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .day:hover {
+            background-color: #add8e6;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #diary-entry {
+            margin-top: 20px;
+        }
+
+        #hour-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hour-slot {
+            padding: 10px;
+            background-color: #e6f7ff;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Личный дневник</h1>
+        <div id="calendar"></div>
+        <div id="diary-entry" class="hidden">
+            <h2 id="selected-date"></h2>
+            <div id="hour-list"></div>
+            <textarea id="entry-text" placeholder="Запишите что-нибудь для этого дня..." rows="10"></textarea>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendarElement = document.getElementById('calendar');
+            const diaryEntryElement = document.getElementById('diary-entry');
+            const selectedDateElement = document.getElementById('selected-date');
+            const hourListElement = document.getElementById('hour-list');
+            const entryTextArea = document.getElementById('entry-text');
+
+            // Функция для генерации календаря
+            function generateCalendar() {
+                const currentDate = new Date();
+                const currentMonth = currentDate.getMonth();
+                const currentYear = currentDate.getFullYear();
+                const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.classList.add('day');
+                    dayElement.textContent = i;
+                    dayElement.addEventListener('click', () => openDiaryEntry(i));
+                    calendarElement.appendChild(dayElement);
+                }
+            }
+
+            // Функция для открытия записи на выбранную дату
+            function openDiaryEntry(day) {
+                const currentDate = new Date();
+                const selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+
+                selectedDateElement.textContent = `День: ${selectedDate.toLocaleDateString('ru-RU')}`;
+
+                // Создаем список времени по часам
+                hourListElement.innerHTML = '';
+                for (let hour = 0; hour < 24; hour++) {
+                    const hourSlot = document.createElement('div');
+                    hourSlot.classList.add('hour-slot');
+                    hourSlot.textContent = `${hour}:00`;
+                    hourSlot.addEventListener('click', () => {
+                        entryTextArea.value = `Запись на ${hour}:00`;
+                    });
+                    hourListElement.appendChild(hourSlot);
+                }
+
+                diaryEntryElement.classList.remove('hidden');
+            }
+
+            generateCalendar();
+        });
+    </script>
+</body>
+</html>
