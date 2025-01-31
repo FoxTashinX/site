@@ -2,127 +2,134 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный дневник</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
         }
 
-        .calendar {
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #calendar {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: repeat(3, 1fr); /* 3 календаря в строке */
+            gap: 20px;
+        }
+
+        .month {
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+
+        .month h2 {
+            text-align: center;
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 7 дней в строке */
             gap: 5px;
+            margin-top: 10px;
         }
 
         .day {
-            border: 1px solid #ccc;
-            padding: 10px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
             cursor: pointer;
+            border-radius: 50%;
             text-align: center;
-            min-height: 60px;
+            font-size: 14px;
         }
 
         .day:hover {
-            background-color: #f0f0f0;
+            background-color: #add8e6;
         }
 
-        .diary-entry {
+        .day.disabled {
+            background-color: #e0e0e0;
+            cursor: not-allowed;
+        }
+
+        .hidden {
             display: none;
-            margin-top: 20px;
-        }
-
-        .hour-block {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #eee;
-        }
-
-        textarea {
-            width: 100%;
-            height: 80px;
-            margin-top: 5px;
-            resize: vertical;
-        }
-
-        .back-button {
-            margin-bottom: 20px;
-            padding: 5px 15px;
-            cursor: pointer;
-        }
-
-        .selected {
-            background-color: #e0e0ff;
         }
     </style>
 </head>
 <body>
-    <div class="calendar" id="calendar"></div>
-    <div class="diary-entry" id="diaryEntry">
-        <button class="back-button" onclick="showCalendar()">← Назад к календарю</button>
-        <h2 id="selectedDate"></h2>
-        <div id="timeSlots"></div>
+    <div class="container">
+        <h1>Личный дневник</h1>
+        <div id="calendar"></div>
     </div>
 
     <script>
-        // Инициализация календаря
-        function initCalendar() {
-            const calendar = document.getElementById('calendar');
-            const today = new Date();
-            const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-            
-            // Создание дней календаря
-            for (let day = 1; day <= daysInMonth; day++) {
-                const date = new Date(today.getFullYear(), today.getMonth(), day);
-                const dayElement = document.createElement('div');
-                dayElement.className = 'day';
-                dayElement.textContent = day;
-                dayElement.setAttribute('data-date', date.toISOString().split('T')[0]);
-                dayElement.onclick = () => showDiary(date);
-                calendar.appendChild(dayElement);
+        document.addEventListener('DOMContentLoaded', () => {
+            const calendarElement = document.getElementById('calendar');
+
+            // Функция для генерации календаря на месяц
+            function generateMonth(year, month) {
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const firstDay = new Date(year, month, 1).getDay(); // День недели для 1-го числа месяца
+
+                const monthElement = document.createElement('div');
+                monthElement.classList.add('month');
+
+                const monthName = new Date(year, month).toLocaleString('ru-RU', { month: 'long' });
+                const monthTitle = document.createElement('h2');
+                monthTitle.textContent = `${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}`;
+                monthElement.appendChild(monthTitle);
+
+                const daysContainer = document.createElement('div');
+                daysContainer.classList.add('days');
+
+                // Добавляем пустые ячейки до первого дня месяца
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyCell = document.createElement('div');
+                    emptyCell.classList.add('day', 'disabled');
+                    daysContainer.appendChild(emptyCell);
+                }
+
+                // Добавляем дни месяца
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.classList.add('day');
+                    dayElement.textContent = day;
+                    dayElement.addEventListener('click', () => alert(`Вы выбрали ${day} ${monthName} ${year}`));
+                    daysContainer.appendChild(dayElement);
+                }
+
+                monthElement.appendChild(daysContainer);
+                return monthElement;
             }
-        }
 
-        // Показать запись дневника
-        function showDiary(date) {
-            document.getElementById('calendar').style.display = 'none';
-            document.getElementById('diaryEntry').style.display = 'block';
-            const formattedDate = date.toLocaleDateString('ru-RU');
-            document.getElementById('selectedDate').textContent = formattedDate;
-            
-            const timeSlots = document.getElementById('timeSlots');
-            timeSlots.innerHTML = '';
-            
-            // Создание временных слотов
-            for (let hour = 0; hour < 24; hour++) {
-                const hourBlock = document.createElement('div');
-                hourBlock.className = 'hour-block';
-                const timeKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(hour).padStart(2, '0')}`;
-                
-                hourBlock.innerHTML = `
-                    <strong>${String(hour).padStart(2, '0')}:00</strong>
-                    <textarea data-time="${timeKey}">${localStorage.getItem(timeKey) || ''}</textarea>
-                `;
-                
-                // Сохранение при изменении
-                hourBlock.querySelector('textarea').addEventListener('input', function() {
-                    localStorage.setItem(timeKey, this.value);
-                });
-                
-                timeSlots.appendChild(hourBlock);
+            // Генерация календаря для всех месяцев
+            const currentYear = new Date().getFullYear();
+
+            for (let month = 0; month < 12; month++) {
+                const monthCalendar = generateMonth(currentYear, month);
+                calendarElement.appendChild(monthCalendar);
             }
-        }
-
-        // Вернуться к календарю
-        function showCalendar() {
-            document.getElementById('calendar').style.display = 'grid';
-            document.getElementById('diaryEntry').style.display = 'none';
-        }
-
-        // Инициализация при загрузке
-        window.onload = initCalendar;
+        });
     </script>
 </body>
 </html>
