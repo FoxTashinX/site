@@ -249,45 +249,45 @@
     }
 
     .month {
-        background-color: var(--bg-color-light); /* Светлый фон для месяца */
-        border: 1px solid var(--highlight-color);
-    }
+    background-color: var(--bg-color-dark);
+    border: 1px solid var(--highlight-color);
+}
 
-    .month h2 {
-        color: var(--text-color-dark);
-    }
+.month h2 {
+    color: var(--text-color-light);
+}
 
-    .day {
-        background-color: var(--bg-color-light); /* Светлый фон для дней */
-        color: var(--text-color-dark);
-    }
+.day {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-light);
+}
 
-    .day:hover {
-        background-color: var(--link-hover-color);
-        color: var(--text-color-light);
-    }
+.day:hover {
+    background-color: var(--link-hover-color);
+    color: var(--text-color-dark);
+}
 
-    /* Для светлой темы */
-    .light-theme .month {
-        background-color: var(--bg-color-dark); /* Темный фон для месяца */
-        color: var(--text-color-light);
-    }
+/* Для светлой темы */
+.light-theme .month {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-dark);
+}
 
-    .light-theme .day {
-        background-color: var(--bg-color-dark); /* Темный фон для дней */
-        color: var(--text-color-light);
-    }
+.light-theme .day {
+    background-color: var(--bg-color-light);
+    color: var(--text-color-dark);
+}
 
-    .light-theme .day:hover {
-        background-color: var(--highlight-color);
-        color: var(--text-color-dark);
-    }
+.light-theme .day:hover {
+    background-color: var(--highlight-color);
+    color: var(--text-color-dark);
+}
 
-    /* Подсветка активного дня */
-    .day.selected {
-        background-color: var(--highlight-color);
-        color: var(--text-color-light);
-    }
+/* Подсветка активного дня */
+.day.selected {
+    background-color: var(--highlight-color);
+    color: var(--text-color-light);
+}
 </style>
 </head>
 <body>
