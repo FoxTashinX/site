@@ -8,7 +8,7 @@
     <meta name="author" content="Ваше Имя">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Личный дневник</title>
-    <style>
+   <style>
     :root {
         --bg-color-light: #F5F5DC;
         --text-color-light: #4A3F35;
@@ -43,7 +43,7 @@
         max-width: 1200px;
         margin: 30px auto;
         padding: 30px;
-        background-color: white;
+        background-color: var(--bg-color-light);
         box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
         display: flex;
@@ -175,7 +175,7 @@
     .month {
         border: 1px solid var(--highlight-color);
         padding: 15px;
-        background-color: var(--bg-color-light);
+        background-color: var(--bg-color-light); /* Изменение фона месяца */
         border-radius: 10px;
     }
 
@@ -200,7 +200,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--bg-color-light);
+        background-color: var(--bg-color-light); /* Изменение фона дня */
         cursor: pointer;
         border-radius: 50%;
         text-align: center;
