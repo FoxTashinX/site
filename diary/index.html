@@ -80,6 +80,7 @@
             padding: 15px;
             background-color: #e6f7ff;
             border: 1px solid #ddd;
+            transition: opacity 0.3s ease-in-out;
         }
 
         .day-info h3 {
@@ -91,11 +92,11 @@
 <body>
     <div class="container">
         <h1>Личный дневник</h1>
-        <div id="calendar"></div>
         <div id="day-info" class="day-info hidden">
             <h3>Информация о выбранной дате:</h3>
             <p id="selected-date"></p>
         </div>
+        <div id="calendar"></div>
     </div>
 
     <script>
