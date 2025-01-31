@@ -9,232 +9,234 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>Личный дневник</title>
     <style>
-        :root {
-            --bg-color-light: #F5F5DC;
-            --text-color-light: #4A3F35;
-            --bg-color-dark: #8A6642;
-            --text-color-dark: #F0EAD6;
-            --highlight-color: #BCAB90;
-            --link-hover-color: #D2691E;
-        }
+    :root {
+        --bg-color-light: #F5F5DC;
+        --text-color-light: #4A3F35;
+        --bg-color-dark: #8A6642;
+        --text-color-dark: #F0EAD6;
+        --highlight-color: #BCAB90;
+        --link-hover-color: #D2691E;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition: all 0.3s ease;
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color-dark);
-            color: var(--text-color-dark);
-            line-height: 1.6;
-            overflow-y: auto;
-            font-size: 16px;
-        }
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: var(--bg-color-dark);
+        color: var(--text-color-dark);
+        line-height: 1.6;
+        overflow-y: auto;
+        font-size: 16px;
+    }
 
-        .light-theme {
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
-        }
+    .light-theme {
+        background-color: var(--bg-color-light);
+        color: var(--text-color-light);
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 30px;
-            background-color: white;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            display: flex;
-            gap: 30px;
-        }
+    .container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 30px;
+        background-color: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        display: flex;
+        gap: 30px;
+    }
 
-        header {
-            background: rgba(107, 78, 61, 0.95);
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+    header {
+        background: rgba(107, 78, 61, 0.95);
+        padding: 1.5rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
 
-        .light-theme header {
-            background: #C2B280;
-        }
+    .light-theme header {
+        background: #C2B280;
+    }
 
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            list-style: none;
-            padding: 0;
-        }
+    nav ul {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        list-style: none;
+        padding: 0;
+    }
 
-        nav a {
-            color: var(--highlight-color);
-            text-decoration: none;
-            padding: 0.7rem 1.2rem;
-            border-radius: 25px;
-            position: relative;
-        }
+    nav a {
+        color: var(--highlight-color);
+        text-decoration: none;
+        padding: 0.7rem 1.2rem;
+        border-radius: 25px;
+        position: relative;
+    }
 
-        nav a:hover {
-            color: var(--link-hover-color);
-            background: rgba(188, 171, 144, 0.1);
-        }
+    nav a:hover {
+        color: var(--link-hover-color);
+        background: rgba(188, 171, 144, 0.1);
+    }
 
-        nav a.active {
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-        }
+    nav a.active {
+        background: var(--highlight-color);
+        color: var(--text-color-light);
+    }
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+    }
 
-        .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--highlight-color);
-        }
+    .project-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 2rem;
+        backdrop-filter: blur(5px);
+        border: 1px solid var(--highlight-color);
+    }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 1.5rem;
-        }
+    .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--highlight-color);
+        color: var(--text-color-light);
+        border-radius: 25px;
+        text-decoration: none;
+        margin-top: 1.5rem;
+    }
 
-        .btn:hover {
-            background: var(--link-hover-color);
-            transform: scale(1.05);
-        }
+    .btn:hover {
+        background: var(--link-hover-color);
+        transform: scale(1.05);
+    }
 
-        .theme-toggle {
-            position: fixed;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border: none;
-            padding: 1rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            z-index: 1000;
-        }
+    .theme-toggle {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        background: var(--highlight-color);
+        color: var(--text-color-light);
+        border: none;
+        padding: 1rem 1.5rem;
+        border-radius: 25px;
+        cursor: pointer;
+        z-index: 1000;
+    }
 
-        .theme-toggle:hover {
-            background: var(--link-hover-color);
-        }
+    .theme-toggle:hover {
+        background: var(--link-hover-color);
+    }
 
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 5rem;
-            border-top: 1px solid var(--highlight-color);
-        }
+    footer {
+        text-align: center;
+        padding: 3rem 0;
+        margin-top: 5rem;
+        border-top: 1px solid var(--highlight-color);
+    }
 
-        .form-container {
-            max-width: 700px;
-            margin: 3rem auto;
-            padding: 3rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-        }
+    .form-container {
+        max-width: 700px;
+        margin: 3rem auto;
+        padding: 3rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+    }
 
-        .form-container input,
-        .form-container textarea {
-            width: 100%;
-            padding: 1rem;
-            margin: 1rem 0;
-            border: 1px solid var(--highlight-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: inherit;
-        }
+    .form-container input,
+    .form-container textarea {
+        width: 100%;
+        padding: 1rem;
+        margin: 1rem 0;
+        border: 1px solid var(--highlight-color);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        color: inherit;
+    }
 
-        #calendar {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
+    #calendar {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-height: 500px;
+        overflow-y: auto;
+    }
 
-        .month {
-            border: 1px solid #ddd;
-            padding: 15px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-        }
+    .month {
+        border: 1px solid var(--highlight-color);
+        padding: 15px;
+        background-color: var(--bg-color-light);
+        border-radius: 10px;
+    }
 
-        .month h2 {
-            text-align: center;
-            margin: 0;
-            font-size: 24px;
-            padding-bottom: 10px;
-        }
+    .month h2 {
+        text-align: center;
+        margin: 0;
+        font-size: 24px;
+        padding-bottom: 10px;
+        color: var(--text-color-dark);
+    }
 
-        .days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
-            margin-top: 10px;
-        }
+    .days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        margin-top: 10px;
+    }
 
-        .day {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f5f5f5;
-            cursor: pointer;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 16px;
-        }
+    .day {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--bg-color-light);
+        cursor: pointer;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 16px;
+        color: var(--text-color-dark);
+    }
 
-        .day:hover {
-            background-color: #add8e6;
-        }
+    .day:hover {
+        background-color: var(--link-hover-color);
+        color: var(--text-color-light);
+    }
 
-        .day.disabled {
-            background-color: #e0e0e0;
-            cursor: not-allowed;
-        }
+    .day.disabled {
+        background-color: #e0e0e0;
+        cursor: not-allowed;
+    }
 
-        .hidden {
-            display: none;
-        }
+    .hidden {
+        display: none;
+    }
 
-        .day-info {
-            width: 300px;
-            padding: 20px;
-            background-color: #e6f7ff;
-            border: 1px solid #ddd;
-            transition: opacity 0.3s ease-in-out;
-            max-height: 500px;
-            overflow-y: auto;
-        }
+    .day-info {
+        width: 300px;
+        padding: 20px;
+        background-color: #e6f7ff;
+        border: 1px solid #ddd;
+        transition: opacity 0.3s ease-in-out;
+        max-height: 500px;
+        overflow-y: auto;
+    }
 
-        .day-info h3 {
-            margin: 0;
-            font-size: 20px;
-        }
-
-    </style>
+    .day-info h3 {
+        margin: 0;
+        font-size: 20px;
+    }
+</style>
 </head>
 <body>
     <button class="theme-toggle" aria-label="Переключить тему">Тема: Ночь</button>
