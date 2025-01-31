@@ -32,6 +32,7 @@
             line-height: 1.6;
             overflow: hidden;
             position: relative;
+            font-size: 16px;
         }
 
         .light-theme {
@@ -40,16 +41,17 @@
         }
 
         .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 20px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
             background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
         header {
             background: rgba(107, 78, 61, 0.95);
-            padding: 1rem 0;
+            padding: 1.5rem 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
@@ -60,7 +62,7 @@
         nav ul {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 3rem;
             list-style: none;
             padding: 0;
         }
@@ -68,7 +70,7 @@
         nav a {
             color: var(--highlight-color);
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0.7rem 1.2rem;
             border-radius: 25px;
             position: relative;
         }
@@ -85,7 +87,7 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             padding: 2rem 0;
         }
@@ -93,7 +95,7 @@
         .project-card {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            padding: 1.5rem;
+            padding: 2rem;
             backdrop-filter: blur(5px);
             border: 1px solid var(--highlight-color);
         }
@@ -105,12 +107,12 @@
 
         .btn {
             display: inline-block;
-            padding: 0.8rem 1.5rem;
+            padding: 1rem 2rem;
             background: var(--highlight-color);
             color: var(--text-color-light);
             border-radius: 25px;
             text-decoration: none;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         .btn:hover {
@@ -120,12 +122,12 @@
 
         .theme-toggle {
             position: fixed;
-            top: 1rem;
-            right: 1rem;
+            top: 1.5rem;
+            right: 1.5rem;
             background: var(--highlight-color);
             color: var(--text-color-light);
             border: none;
-            padding: 0.8rem 1.2rem;
+            padding: 1rem 1.5rem;
             border-radius: 25px;
             cursor: pointer;
             z-index: 1000;
@@ -137,15 +139,15 @@
 
         footer {
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
+            padding: 3rem 0;
+            margin-top: 5rem;
             border-top: 1px solid var(--highlight-color);
         }
 
         .form-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
+            max-width: 700px;
+            margin: 3rem auto;
+            padding: 3rem;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
         }
@@ -153,43 +155,44 @@
         .form-container input,
         .form-container textarea {
             width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
+            padding: 1rem;
+            margin: 1rem 0;
             border: 1px solid var(--highlight-color);
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.05);
             color: inherit;
         }
 
-        /* Стили для календаря */
         #calendar {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 календаря в строке */
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
 
         .month {
             border: 1px solid #ddd;
-            padding: 10px;
+            padding: 15px;
             background-color: #f5f5f5;
+            border-radius: 10px;
         }
 
         .month h2 {
             text-align: center;
             margin: 0;
-            font-size: 20px;
+            font-size: 24px;
+            padding-bottom: 10px;
         }
 
         .days {
             display: grid;
-            grid-template-columns: repeat(7, 1fr); /* 7 дней в строке */
+            grid-template-columns: repeat(7, 1fr);
             gap: 5px;
             margin-top: 10px;
         }
 
         .day {
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -197,7 +200,7 @@
             cursor: pointer;
             border-radius: 50%;
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .day:hover {
@@ -214,8 +217,8 @@
         }
 
         .day-info {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 30px;
+            padding: 20px;
             background-color: #e6f7ff;
             border: 1px solid #ddd;
             transition: opacity 0.3s ease-in-out;
@@ -223,7 +226,7 @@
 
         .day-info h3 {
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
         }
 
     </style>
