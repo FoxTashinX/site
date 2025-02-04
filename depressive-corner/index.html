@@ -31,6 +31,42 @@
             padding: 2rem;
         }
 
+        header {
+            background: rgba(107, 78, 61, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .light-theme header {
+            background: #C2B280;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        nav a {
+            color: var(--text-color-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--link-hover-color);
+            background: rgba(188, 171, 144, 0.1);
+        }
+
+        nav a.active {
+            background: var(--highlight-color);
+            color: var(--text-color-light);
+        }
+
         .video-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
