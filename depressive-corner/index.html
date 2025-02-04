@@ -202,5 +202,23 @@
             themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
         });
     </script>
+    <script>
+    // Проверка сохраненной темы в localStorage при загрузке страницы
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeToggle.textContent = 'Тема: День';
+    }
+
+    const themeToggle = document.querySelector('.theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
+
+        // Сохранение текущей темы в localStorage
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+</script>
 </body>
 </html>
