@@ -266,33 +266,24 @@
             e.target.reset();
         });
 
-        // Щупальца
-        const tentaclesContainer = document.createElement('div');
-        tentaclesContainer.classList.add('tentacles');
-        document.body.appendChild(tentaclesContainer);
+        <script>
+    // Проверка сохраненной темы в localStorage при загрузке страницы
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeToggle.textContent = 'Тема: День';
+    }
 
-        document.addEventListener('mousemove', (e) => {
-            const dot = document.createElement('div');
-            dot.classList.add('tentacle');
-            tentaclesContainer.appendChild(dot);
+    const themeToggle = document.querySelector('.theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
 
-            const targetX = e.pageX + Math.random() * 200 - 100;
-            const targetY = e.pageY + Math.random() * 200 - 100;
-
-            dot.style.left = `${e.pageX}px`;
-            dot.style.top = `${e.pageY}px`;
-
-            const dx = targetX - e.pageX;
-            const dy = targetY - e.pageY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            const duration = distance / 200;
-
-            dot.style.transition = `transform ${duration}s ease, opacity ${duration}s ease`;
-            dot.style.transform = `translate(${dx}px, ${dy}px)`;
-            dot.style.opacity = '0';
-
-            setTimeout(() => dot.remove(), duration * 1000);
-        });
+        // Сохранение текущей темы в localStorage
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    });
+</script>
     </script>
 </body>
 </html>
