@@ -382,9 +382,7 @@
                 themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
             });
         });
-    </script>
-    <script>
-    // Проверка сохраненной темы в localStorage при загрузке страницы
+        // Проверка сохраненной темы в localStorage при загрузке страницы
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
@@ -400,6 +398,6 @@
         // Сохранение текущей темы в localStorage
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
-</script>
+    </script>
 </body>
 </html>
