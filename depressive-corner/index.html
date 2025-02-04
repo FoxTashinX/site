@@ -23,6 +23,12 @@
             background-color: var(--bg-color-dark);
             color: var(--text-color-dark);
             line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .light-theme {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
         }
 
         .container {
@@ -65,6 +71,23 @@
         nav a.active {
             background: var(--highlight-color);
             color: var(--text-color-light);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: var(--highlight-color);
+            color: var(--text-color-light);
+            border: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: var(--link-hover-color);
         }
 
         .video-gallery {
@@ -148,5 +171,14 @@
     <footer>
         <p>© 2025 Все права защищены</p>
     </footer>
+
+    <script>
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLight = document.body.classList.contains('light-theme');
+            themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
+        });
+    </script>
 </body>
 </html>
