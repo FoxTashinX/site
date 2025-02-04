@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Галерея видео из моего портфолио.">
+    <meta name="keywords" content="видео, портфолио, проекты">
+    <meta name="author" content="Ваше Имя">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>Галерея Видео</title>
+    <style>
+        :root {
+            --bg-color-light: #F5F5DC;
+            --text-color-light: #000000;
+            --bg-color-dark: #8A6642;
+            --text-color-dark: #000000;
+            --highlight-color: #BCAB90;
+            --link-hover-color: #D2691E;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid var(--highlight-color);
+            text-align: center;
+        }
+
+        .video-card video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .video-card h2 {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--highlight-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            .video-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Главная</a></li>
+                <li><a href="../work/index.html">Работы</a></li>
+                <li><a href="../diary/index.html">Дневник</a></li>
+                <li><a href="index.html">Уголок</a></li>
+                <li><a href="../experiences/index.html">Опыт</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Мои Видео</h1>
+        <div class="video-gallery">
+            <div class="video-card">
+                <video controls>
+                    <source src="video1.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+                <h2>Название видео 1</h2>
+            </div>
+            
+            <div class="video-card">
+                <video controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+                <h2>Название видео 2</h2>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 Все права защищены</p>
+    </footer>
+</body>
+</html>
