@@ -10,9 +10,22 @@
         input, button { margin: 10px; padding: 10px; width: 200px; }
     </style>
     <script>
-        // Настройка переменных окружения Netlify
+        // Переменные окружения должны быть заменены на сервере
         const SUPABASE_URL = "{{ SUPABASE_URL }}";
         const SUPABASE_ANON_KEY = "{{ SUPABASE_ANON_KEY }}";
+
+        // Проверка переменных окружения
+        if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+            console.error("Supabase URL или анонимный ключ не установлены.");
+        }
+
+        // Инициализация Supabase
+        let supabase;
+        try {
+            supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        } catch (error) {
+            console.error("Ошибка при инициализации Supabase:", error);
+        }
     </script>
 </head>
 <body>
@@ -30,30 +43,24 @@
     <button onclick="logout()">Выйти</button>
 
     <script>
-        // Инициализация Supabase
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        document.addEventListener("DOMContentLoaded", () => {
-            checkAuthStatus();
-        });
-
-        async function checkAuthStatus() {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-                alert("Вы уже авторизованы");
-            }
-        }
-
         async function register() {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
-            const { error } = await supabase.auth.signUp({ email, password });
+            if (!supabase) {
+                alert("Supabase не инициализирован.");
+                return;
+            }
 
-            if (error) {
-                alert("Ошибка: " + error.message);
-            } else {
-                alert("Подтвердите email, проверьте почту!");
+            try {
+                const { error } = await supabase.auth.signUp({ email, password });
+                if (error) {
+                    alert("Ошибка: " + error.message);
+                } else {
+                    alert("Подтвердите email, проверьте почту!");
+                }
+            } catch (error) {
+                console.error("Ошибка при регистрации:", error);
             }
         }
 
@@ -61,21 +68,38 @@
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
 
-            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+            if (!supabase) {
+                alert("Supabase не инициализирован.");
+                return;
+            }
 
-            if (error) {
-                alert("Ошибка: " + error.message);
-            } else {
-                alert("Вы успешно вошли в систему!");
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) {
+                    alert("Ошибка: " + error.message);
+                } else {
+                    alert("Вы успешно вошли в систему!");
+                }
+            } catch (error) {
+                console.error("Ошибка при входе:", error);
             }
         }
 
         async function logout() {
-            const { error } = await supabase.auth.signOut();
-            if (error) {
-                alert("Ошибка: " + error.message);
-            } else {
-                alert("Вы вышли из системы");
+            if (!supabase) {
+                alert("Supabase не инициализирован.");
+                return;
+            }
+
+            try {
+                const { error } = await supabase.auth.signOut();
+                if (error) {
+                    alert("Ошибка: " + error.message);
+                } else {
+                    alert("Вы вышли из системы");
+                }
+            } catch (error) {
+                console.error("Ошибка при выходе:", error);
             }
         }
     </script>
