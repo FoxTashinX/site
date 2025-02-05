@@ -27,13 +27,23 @@
 
     <script>
         // Использование переменных окружения
-        const SUPABASE_URL = process.env.SUPABASE_URL;
-        const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+        const SUPABASE_URL = "YOUR_SUPABASE_URL";
+        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
 
         // Инициализация Supabase
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // 🔹 Регистрация с email и подтверждением почты
+        document.addEventListener("DOMContentLoaded", () => {
+            checkAuthStatus();
+        });
+
+        async function checkAuthStatus() {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (user) {
+                alert("Вы уже авторизованы");
+            }
+        }
+
         async function register() {
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -47,7 +57,6 @@
             }
         }
 
-        // 🔹 Вход в систему
         async function login() {
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
@@ -61,7 +70,6 @@
             }
         }
 
-        // 🔹 Выход из системы
         async function logout() {
             const { error } = await supabase.auth.signOut();
             if (error) {
