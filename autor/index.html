@@ -9,9 +9,13 @@
         body { font-family: Arial, sans-serif; text-align: center; }
         input, button { margin: 10px; padding: 10px; width: 200px; }
     </style>
+    <script>
+        // Настройка переменных окружения Netlify
+        const SUPABASE_URL = "{{ SUPABASE_URL }}";
+        const SUPABASE_ANON_KEY = "{{ SUPABASE_ANON_KEY }}";
+    </script>
 </head>
 <body>
-
     <h2>Регистрация</h2>
     <input type="email" id="email" placeholder="Введите email">
     <input type="password" id="password" placeholder="Введите пароль">
@@ -26,10 +30,6 @@
     <button onclick="logout()">Выйти</button>
 
     <script>
-        // Использование переменных окружения
-        const SUPABASE_URL = "YOUR_SUPABASE_URL";
-        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-
         // Инициализация Supabase
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -79,6 +79,5 @@
             }
         }
     </script>
-
 </body>
 </html>
