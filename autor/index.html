@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация на Supabase</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        input, button { margin: 10px; padding: 10px; width: 200px; }
+    </style>
+</head>
+<body>
+
+    <h2>Регистрация</h2>
+    <input type="email" id="email" placeholder="Введите email">
+    <input type="password" id="password" placeholder="Введите пароль">
+    <button onclick="register()">Зарегистрироваться</button>
+
+    <h2>Вход</h2>
+    <input type="email" id="login-email" placeholder="Введите email">
+    <input type="password" id="login-password" placeholder="Введите пароль">
+    <button onclick="login()">Войти</button>
+
+    <h2>Выход</h2>
+    <button onclick="logout()">Выйти</button>
+
+    <script>
+        // 🔹 Вставь сюда свои данные Supabase!
+        const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co";
+        const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+
+        // Инициализация Supabase
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // 🔹 Регистрация с email и подтверждением почты
+        async function register() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const { error } = await supabase.auth.signUp({ email, password });
+
+            if (error) {
+                alert("Ошибка: " + error.message);
+            } else {
+                alert("Подтвердите email, проверьте почту!");
+            }
+        }
+
+        // 🔹 Вход в систему
+        async function login() {
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
+
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                alert("Ошибка: " + error.message);
+            } else {
+                alert("Вы успешно вошли в систему!");
+            }
+        }
+
+        // 🔹 Выход из системы
+        async function logout() {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                alert("Ошибка: " + error.message);
+            } else {
+                alert("Вы вышли из системы");
+            }
+        }
+    </script>
+
+</body>
+</html>
