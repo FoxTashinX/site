@@ -12,7 +12,7 @@
         --text-color-light: #000000;
         --bg-color-dark: #8A6642;
         --text-color-dark: #000000;
-        --highlight-color: #000000;
+        --highlight-color: #BCAB90;
         --link-hover-color: #D2691E;
         }
 
@@ -20,29 +20,37 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Roboto', sans-serif;
             transition: all 0.3s ease;
         }
 
         body {
-            background: var(--bg-color-dark);
-            color: #000000;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-color-dark);
+            color: var(--text-color-dark);
             line-height: 1.6;
+            overflow: hidden;
+            position: relative;
         }
 
-        .top-nav {
-            background: rgba(107, 78, 61, 0.95);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+        .light-theme {
+            background-color: var(--bg-color-light);
+            color: var(--text-color-light);
         }
 
-        .nav-container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 2rem;
+        }
+
+        header {
+            background: rgba(107, 78, 61, 0.95);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .light-theme header {
+            background: #C2B280;
         }
 
         nav ul {
@@ -54,127 +62,64 @@
         }
 
         nav a {
-            color: var(#000000);
+            color: var(--text-color-light);
             text-decoration: none;
             padding: 0.5rem 1rem;
             border-radius: 25px;
+            position: relative;
         }
 
         nav a:hover {
+            color: var(--link-hover-color);
             background: rgba(188, 171, 144, 0.1);
-            color: var(--link-hover-color);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        nav a.active {
+            background: var(--highlight-color);
+            color: var(--text-color-light);
         }
 
-        h1 {
-            font-size: 3rem;
-            color: var(--highlight-color);
-            margin-bottom: 2rem;
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
         }
 
-        .breadcrumb {
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-
-        .breadcrumb a {
-            color: var(--highlight-color);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--link-hover-color);
-        }
-
-        .responsive-image {
-            width: 100%;
-            max-width: 800px;
-            height: auto;
-            border-radius: 15px;
-            margin: 2rem 0;
-            border: 2px solid var(--highlight-color);
-        }
-
-        .code-container {
-            background: var(--card-bg);
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 1.5rem;
-            margin: 2rem 0;
             backdrop-filter: blur(5px);
             border: 1px solid var(--highlight-color);
         }
 
-        .code-toggle {
-            background: #BCAB90;
-            color: #000000;
-            border: none;
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            display: inline-block;
             padding: 0.8rem 1.5rem;
+            background: var(--highlight-color);
+            color: var(--text-color-light);
             border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
+            text-decoration: none;
             margin-top: 1rem;
         }
 
-        .code-toggle:hover {
+        .btn:hover {
             background: var(--link-hover-color);
             transform: scale(1.05);
-        }
-
-        .code-content,
-        .code-preview {
-            white-space: pre-wrap;
-            font-family: monospace;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            margin: 1rem 0;
-        }
-
-        .code-content {
-            display: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--highlight-color);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 1rem;
-            }
-        }
-
-        /* Стили для переключения темы */
-        :root {
-            --bg-color-light: #F5F5DC;
-            --text-color-light: #000000;
         }
 
         .theme-toggle {
             position: fixed;
             top: 1rem;
             right: 1rem;
-            background: #BCAB90;
-            color: #000000;
+            background: var(--highlight-color);
+            color: var(--text-color-light);
             border: none;
             padding: 0.8rem 1.2rem;
             border-radius: 25px;
@@ -184,22 +129,32 @@
 
         .theme-toggle:hover {
             background: var(--link-hover-color);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
-        body.light-theme {
-            background: var(--bg-color-light);
-            color: #000000;
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid var(--highlight-color);
         }
 
-        .light-theme nav a {
-            color: #000000;
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
         }
 
-        .light-theme .project-card {
-            background: rgba(255,255,255,0.9);
-            border-color: #000000;
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            border: 1px solid var(--highlight-color);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: inherit;
         }
     </style>
 </head>
