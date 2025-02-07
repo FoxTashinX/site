@@ -218,41 +218,26 @@
     </div>
 
     <script>
+        // Проверка сохраненной темы в localStorage при загрузке страницы
+        const savedTheme = localStorage.getItem('theme');
         const themeToggle = document.querySelector('.theme-toggle');
+
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.textContent = 'Тема: День';
+        } else {
+            document.body.classList.remove('light-theme'); // Гарантируем темную тему по умолчанию
+            themeToggle.textContent = 'Тема: Ночь';
+        }
+
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('light-theme');
             const isLight = document.body.classList.contains('light-theme');
             themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
+
+            // Сохранение текущей темы в localStorage
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
-
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.href === window.location.href) {
-                link.classList.add('active');
-            }
-        });
-
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Спасибо за ваше сообщение!');
-            e.target.reset();
-        });
-    </script>
-    <script>
-    // Проверка сохраненной темы в localStorage при загрузке страницы
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-        themeToggle.textContent = 'Тема: День';
-    }
-
-    const themeToggle = document.querySelector('.theme-toggle');
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        const isLight = document.body.classList.contains('light-theme');
-        themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
-
-        // Сохранение текущей темы в localStorage
-        localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
 </script>
 </body>
