@@ -450,45 +450,47 @@ if __name__ == '__main__':
     <!-- HTML для кнопки переключения темы -->
     <button class="theme-toggle" aria-label="Переключить тему">Тема: Ночь</button>
 
-    <script>
-        // Проверка сохраненной темы в localStorage при загрузке страницы
-        const savedTheme = localStorage.getItem('theme');
-        const themeToggle = document.querySelector('.theme-toggle');
+<script>
+    // Проверка сохраненной темы в localStorage при загрузке страницы
+    const savedTheme = localStorage.getItem('theme');
+    const themeToggle = document.querySelector('.theme-toggle');
 
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-theme');
-            themeToggle.textContent = 'Тема: День';
-        } else {
-            document.body.classList.remove('light-theme'); // Гарантируем темную тему по умолчанию
-            themeToggle.textContent = 'Тема: Ночь';
-        }
+    // Инициализация темы
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeToggle.textContent = 'Тема: День';
+    } else {
+        document.body.classList.remove('light-theme');
+        themeToggle.textContent = 'Тема: Ночь';
+    }
 
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
+    // Обработчик клика для переключения темы
+    themeToggle.addEventListener('click', () => {
+        const isLight = document.body.classList.toggle('light-theme');
+        
+        // Обновление текста кнопки
+        themeToggle.textContent = isLight 
+            ? 'Тема: День' 
+            : 'Тема: Ночь';
+            
+        // Сохранение текущей темы
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        
+        // Анимация кнопки
+        themeToggle.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            themeToggle.style.transform = 'scale(1)';
+        }, 100);
+    });
 
-            // Сохранение текущей темы в localStorage
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        });
-
-            // Обработчик клика
-            themeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('light-theme');
-                const isLight = document.body.classList.contains('light-theme');
-                
-                // Обновление текста кнопки
-                themeToggle.textContent = isLight 
-                    ? 'Тема: День' 
-                    : 'Тема: Ночь';
-                    
-                // Анимация кнопки
-                themeToggle.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    themeToggle.style.transform = 'scale(1)';
-                }, 100);
-            });
-        });
-    </script>
+    // Скрипт для показа/скрытия кода
+    document.querySelector('.code-toggle').addEventListener('click', function() {
+        const codeContent = document.querySelector('.code-content');
+        const isHidden = codeContent.style.display === 'none';
+        
+        codeContent.style.display = isHidden ? 'block' : 'none';
+        this.textContent = isHidden ? 'Скрыть код' : 'Показать полный код';
+    });
+</script>
 </body>
 </html>
