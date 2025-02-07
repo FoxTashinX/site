@@ -196,15 +196,7 @@
     </footer>
 
     <script>
-        const themeToggle = document.querySelector('.theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
-        });
-    </script>
-    <script>
-    // Проверка сохраненной темы в localStorage при загрузке страницы
+       // Проверка сохраненной темы в localStorage при загрузке страницы
         const savedTheme = localStorage.getItem('theme');
         const themeToggle = document.querySelector('.theme-toggle');
 
