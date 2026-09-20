@@ -4,238 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Портфолио моих работ, личных записей и опыта.">
-    <meta name="keywords" content="портфолио, работы, дневник, опыт">
-    <meta name="author" content="Ваше Имя">
+    <meta name="keywords" content="портфолио, работы, дневник, опыт, foxytashin">
+    <meta name="author" content="FoxTashinX">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Мое Портфолио</title>
-      <style>
-        :root {
-        --bg-color-light: #F5F5DC;
-        --text-color-light: #000000;
-        --bg-color-dark: #8A6642;
-        --text-color-dark: #000000;
-        --highlight-color: #BCAB90;
-        --link-hover-color: #D2691E;
+    <title>FoxTashinX | Портфолио</title>
+    <!-- Tailwind CSS for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+        }
+        .nav-link {
             transition: all 0.3s ease;
         }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: var(--bg-color-dark);
-            color: var(--text-color-dark);
-            line-height: 1.6;
-            overflow: hidden;
-            position: relative;
+        .nav-link:hover, .nav-link.active {
+            color: #38bdf8;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
-
-        .light-theme {
-            background-color: var(--bg-color-light);
-            color: var(--text-color-light);
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            background: rgba(107, 78, 61, 0.95);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        .light-theme header {
-            background: #C2B280;
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            list-style: none;
-            padding: 0;
-        }
-
-        nav a {
-            color: var(--text-color-light);
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            position: relative;
-        }
-
-        nav a:hover {
-            color: var(--link-hover-color);
-            background: rgba(188, 171, 144, 0.1);
-        }
-
-        nav a.active {
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--highlight-color);
-        }
-
-        .project-card:hover {
+        .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: rgba(56, 189, 248, 0.4);
         }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border-radius: 25px;
-            text-decoration: none;
-            margin-top: 1rem;
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .btn:hover {
-            background: var(--link-hover-color);
-            transform: scale(1.05);
-        }
-
-        .theme-toggle {
+        #particles-js {
             position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background: var(--highlight-color);
-            color: var(--text-color-light);
-            border: none;
-            padding: 0.8rem 1.2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        .theme-toggle:hover {
-            background: var(--link-hover-color);
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 4rem;
-            border-top: 1px solid var(--highlight-color);
-        }
-
-        .form-container {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-        }
-
-        .form-container input,
-        .form-container textarea {
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid var(--highlight-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: inherit;
+            height: 100%;
+            z-index: -1;
         }
     </style>
 </head>
-<body>
-    <button class="theme-toggle" aria-label="Переключить тему">Тема: Ночь</button>
+<body class="antialiased">
+    <!-- Particles background container -->
+    <div id="particles-js"></div>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Главная</a></li>
-                <li><a href="work/index.html">Работы</a></li>
-                <li><a href="diary/index.html">Дневник</a></li>
-                <li><a href="depressive-corner/index.html">Уголок</a></li>
-                <li><a href="experiences/index.html">Опыт</a></li>
+    <header class="glass-panel mx-4 mt-6 p-4 sticky top-6 z-50">
+        <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-xl font-bold tracking-wider gradient-text">
+                FoxTashinX
+            </div>
+            <ul class="flex flex-wrap justify-center gap-6 text-sm font-medium">
+                <li><a href="index.html" class="nav-link active"><i class="fa-solid fa-house mr-1"></i> Главная</a></li>
+                <li><a href="work/index.html" class="nav-link"><i class="fa-solid fa-briefcase mr-1"></i> Работы</a></li>
+                <li><a href="diary/index.html" class="nav-link"><i class="fa-solid fa-book mr-1"></i> Дневник</a></li>
+                <li><a href="depressive-corner/index.html" class="nav-link"><i class="fa-solid fa-cloud-moon mr-1"></i> Уголок</a></li>
+                <li><a href="autor/index.html" class="nav-link"><i class="fa-solid fa-user mr-1"></i> Автор</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="container">
-        <main>
-            <h1>Добро пожаловать в мое портфолио</h1>
-            <p>Исследуйте мои работы и личные проекты</p>
-
-            <div class="gallery">
-                <div class="project-card">
-                    <h2>YouTube Канал</h2>
-                    <p>Мои видео-проекты и творческие эксперименты</p>
-                    <a href="https://www.youtube.com/@foxytashin1036" class="btn" target="_blank">Перейти</a>
-                </div>
-
-                <div class="project-card">
-                    <h2>Twitch Трансляции</h2>
-                    <p>Прямые эфиры и интерактивные стримы</p>
-                    <a href="https://www.twitch.tv/foxtashin" class="btn" target="_blank">Перейти</a>
-                </div>
+    <main class="container mx-auto px-4 py-16 flex-grow flex flex-col items-center justify-center text-center">
+        <div class="glass-panel p-10 md:p-16 max-w-3xl w-full mb-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6">Добро пожаловать в моё <span class="gradient-text">Портфолио</span></h1>
+            <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                Здесь собраны мои лучшие работы, мысли, творческие эксперименты и личный опыт. 
+                Исследуйте проекты и следите за моей активностью!
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#projects" class="bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 px-8 rounded-full transition-colors shadow-lg shadow-sky-500/30">
+                    Смотреть проекты
+                </a>
             </div>
-            <footer>
-                <div class="social-links">
-                    <a href="https://github.com/FoxTashinX"><i class="fab fa-github"></i></a>
-                    <a href="https://www.youtube.com/@foxytashin1036"><i class="fa fa-youtube-play"></i></a>
+        </div>
+
+        <div id="projects" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+            <!-- YouTube Card -->
+            <a href="https://www.youtube.com/@foxytashin1036" target="_blank" class="glass-panel p-8 card-hover flex flex-col items-center text-center group cursor-pointer decoration-none text-white">
+                <div class="text-red-500 text-5xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-youtube"></i>
                 </div>
-                <p>© 2025 Все права защищены</p>
-            </footer>
-        </main>
-    </div>
+                <h2 class="text-2xl font-bold mb-2">YouTube Канал</h2>
+                <p class="text-gray-400 text-sm">Мои видео-проекты, нарезки и творческие эксперименты.</p>
+            </a>
 
+            <!-- Twitch Card -->
+            <a href="https://www.twitch.tv/foxtashin" target="_blank" class="glass-panel p-8 card-hover flex flex-col items-center text-center group cursor-pointer decoration-none text-white">
+                <div class="text-purple-500 text-5xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-twitch"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">Twitch Трансляции</h2>
+                <p class="text-gray-400 text-sm">Прямые эфиры, игры и интерактивное общение со зрителями.</p>
+            </a>
+            
+             <!-- GitHub Card -->
+            <a href="https://github.com/FoxTashinX" target="_blank" class="glass-panel p-8 card-hover flex flex-col items-center text-center group cursor-pointer decoration-none text-white md:col-span-2">
+                <div class="text-gray-200 text-5xl mb-4 group-hover:scale-110 transition-transform">
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <h2 class="text-2xl font-bold mb-2">GitHub Репозитории</h2>
+                <p class="text-gray-400 text-sm">Исходный код моих проектов и вклад в open-source.</p>
+            </a>
+        </div>
+    </main>
+
+    <footer class="mt-auto py-8 text-center text-gray-400 text-sm glass-panel border-0 border-t border-white/10 rounded-none">
+        <div class="flex justify-center gap-6 mb-4 text-xl">
+            <a href="https://github.com/FoxTashinX" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.youtube.com/@foxytashin1036" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.twitch.tv/foxtashin" class="hover:text-purple-500 transition-colors"><i class="fa-brands fa-twitch"></i></a>
+        </div>
+        <p>© 2024 FoxTashinX. Все права защищены.</p>
+    </footer>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Проверка сохраненной темы в localStorage при загрузке страницы
-        const savedTheme = localStorage.getItem('theme');
-        const themeToggle = document.querySelector('.theme-toggle');
-
-        if (savedTheme === 'light') {
-            document.body.classList.add('light-theme');
-            themeToggle.textContent = 'Тема: День';
-        } else {
-            document.body.classList.remove('light-theme'); // Гарантируем темную тему по умолчанию
-            themeToggle.textContent = 'Тема: Ночь';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            const isLight = document.body.classList.contains('light-theme');
-            themeToggle.textContent = isLight ? 'Тема: День' : 'Тема: Ночь';
-
-            // Сохранение текущей темы в localStorage
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-        });
-
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.href === window.location.href) {
-                link.classList.add('active');
-            }
-        });
-
-        document.querySelector('form')?.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Спасибо за ваше сообщение!');
-            e.target.reset();
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 40,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1.5,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
-</html>
+</html><!-- Обновление дизайна -->
