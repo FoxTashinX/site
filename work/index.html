@@ -70,10 +70,65 @@
                 <li><a href="index.html" class="nav-link active"><i class="fa-solid fa-briefcase mr-1"></i> Работы</a></li>
                 <li><a href="../diary/index.html" class="nav-link"><i class="fa-solid fa-book mr-1"></i> Дневник</a></li>
                 <li><a href="../depressive-corner/index.html" class="nav-link"><i class="fa-solid fa-cloud-moon mr-1"></i> Уголок</a></li>
-                <li><a href="../autor/index.html" class="nav-link"><i class="fa-solid fa-user mr-1"></i> Автор</a></li>
+            <li><a href="#" onclick="event.preventDefault(); openAuthModal();" class="nav-link text-sky-400"><i class="fa-solid fa-right-to-bracket mr-1"></i> Войти</a></li>
             </ul>
         </nav>
     </header>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="glass-panel p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300" id="auth-modal-content">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold gradient-text mb-2">Авторизация</h2>
+                <p class="text-gray-400 text-sm">Войдите или зарегистрируйтесь</p>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex mb-6 border-b border-white/10">
+                <button onclick="switchTab('login')" id="tab-login" class="flex-1 py-2 text-sm font-semibold border-b-2 border-sky-400 text-white transition-colors">Вход</button>
+                <button onclick="switchTab('register')" id="tab-register" class="flex-1 py-2 text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-white transition-colors">Регистрация</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="form-login" class="flex flex-col gap-4" onsubmit="event.preventDefault(); alert('Функция входа пока в разработке. Требуется настройка backend-сервера.');">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Email</label>
+                    <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="your@email.com">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Пароль</label>
+                    <input type="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-400 text-white font-semibold py-2.5 rounded-lg transition-colors shadow-lg shadow-sky-500/30 mt-2">
+                    Войти
+                </button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="form-register" class="flex flex-col gap-4 hidden" onsubmit="event.preventDefault(); alert('Функция регистрации пока в разработке. Требуется настройка backend-сервера.');">
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Имя</label>
+                    <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="Ваше имя">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Email</label>
+                    <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="your@email.com">
+                </div>
+                <div>
+                    <label class="block text-xs text-gray-400 mb-1">Пароль</label>
+                    <input type="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="Создайте пароль">
+                </div>
+                <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors shadow-lg shadow-indigo-500/30 mt-2">
+                    Зарегистрироваться
+                </button>
+            </form>
+        </div>
+    </div>
+
 
     <main class="container mx-auto px-4 py-16 flex-grow flex flex-col items-center">
         <div class="glass-panel p-10 max-w-3xl w-full mb-12 text-center">
@@ -167,5 +222,58 @@
             "retina_detect": true
         });
     </script>
+
+    <script>
+        function openAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            const content = document.getElementById('auth-modal-content');
+            modal.classList.remove('hidden');
+            // trigger reflow
+            void modal.offsetWidth;
+            modal.classList.remove('opacity-0');
+            content.classList.remove('scale-95');
+        }
+
+        function closeAuthModal() {
+            const modal = document.getElementById('auth-modal');
+            const content = document.getElementById('auth-modal-content');
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function switchTab(tab) {
+            const loginForm = document.getElementById('form-login');
+            const registerForm = document.getElementById('form-register');
+            const loginTab = document.getElementById('tab-login');
+            const registerTab = document.getElementById('tab-register');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                loginTab.classList.replace('border-transparent', 'border-sky-400');
+                loginTab.classList.replace('text-gray-400', 'text-white');
+                registerTab.classList.replace('border-sky-400', 'border-transparent');
+                registerTab.classList.replace('text-white', 'text-gray-400');
+            } else {
+                registerForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+                registerTab.classList.replace('border-transparent', 'border-sky-400');
+                registerTab.classList.replace('text-gray-400', 'text-white');
+                loginTab.classList.replace('border-sky-400', 'border-transparent');
+                loginTab.classList.replace('text-white', 'text-gray-400');
+            }
+        }
+        
+        // Close modal on outside click
+        document.getElementById('auth-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAuthModal();
+            }
+        });
+    </script>
+
 </body>
 </html>
