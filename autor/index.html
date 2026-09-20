@@ -3,28 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация на Supabase</title>
+    <title>Автор | FoxTashinX</title>
+    <!-- Tailwind CSS for rapid styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        input, button { margin: 10px; padding: 10px; width: 200px; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #38bdf8;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        input:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
     </style>
 </head>
-<body>
-    <h2>Регистрация</h2>
-    <input type="email" id="email" placeholder="Введите email">
-    <input type="password" id="password" placeholder="Введите пароль">
-    <button onclick="register()">Зарегистрироваться</button>
+<body class="antialiased">
+    <!-- Particles background container -->
+    <div id="particles-js"></div>
 
-    <h2>Вход</h2>
-    <input type="email" id="login-email" placeholder="Введите email">
-    <input type="password" id="login-password" placeholder="Введите пароль">
-    <button onclick="login()">Войти</button>
+    <header class="glass-panel mx-4 mt-6 p-4 sticky top-6 z-50">
+        <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-xl font-bold tracking-wider gradient-text">
+                FoxTashinX
+            </div>
+            <ul class="flex flex-wrap justify-center gap-6 text-sm font-medium">
+                <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-house mr-1"></i> Главная</a></li>
+                <li><a href="../work/index.html" class="nav-link"><i class="fa-solid fa-briefcase mr-1"></i> Работы</a></li>
+                <li><a href="../diary/index.html" class="nav-link"><i class="fa-solid fa-book mr-1"></i> Дневник</a></li>
+                <li><a href="../depressive-corner/index.html" class="nav-link"><i class="fa-solid fa-cloud-moon mr-1"></i> Уголок</a></li>
+                <li><a href="index.html" class="nav-link active"><i class="fa-solid fa-user mr-1"></i> Автор</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <h2>Выход</h2>
-    <button onclick="logout()">Выйти</button>
+    <main class="container mx-auto px-4 py-16 flex-grow flex flex-col items-center justify-center text-center">
+        <div class="glass-panel p-10 max-w-md w-full mb-8 card-hover">
+            <h2 class="text-3xl font-extrabold mb-6 gradient-text">Регистрация</h2>
+            <div class="flex flex-col gap-4">
+                <input type="email" id="email" placeholder="Введите email" class="w-full px-4 py-3 rounded-lg">
+                <input type="password" id="password" placeholder="Введите пароль" class="w-full px-4 py-3 rounded-lg">
+                <button onclick="register()" class="w-full bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-sky-500/30">
+                    Зарегистрироваться
+                </button>
+            </div>
+        </div>
 
+        <div class="glass-panel p-10 max-w-md w-full mb-8 card-hover">
+            <h2 class="text-3xl font-extrabold mb-6 gradient-text">Вход</h2>
+            <div class="flex flex-col gap-4">
+                <input type="email" id="login-email" placeholder="Введите email" class="w-full px-4 py-3 rounded-lg">
+                <input type="password" id="login-password" placeholder="Введите пароль" class="w-full px-4 py-3 rounded-lg">
+                <button onclick="login()" class="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-indigo-500/30">
+                    Войти
+                </button>
+            </div>
+        </div>
+
+        <div class="glass-panel p-10 max-w-md w-full card-hover">
+            <h2 class="text-3xl font-extrabold mb-6 text-red-400">Выход</h2>
+            <button onclick="logout()" class="w-full bg-red-500 hover:bg-red-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg shadow-red-500/30">
+                Выйти
+            </button>
+        </div>
+    </main>
+
+    <footer class="mt-auto py-8 text-center text-gray-400 text-sm glass-panel border-0 border-t border-white/10 rounded-none">
+        <div class="flex justify-center gap-6 mb-4 text-xl">
+            <a href="https://github.com/FoxTashinX" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.youtube.com/@foxytashin1036" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.twitch.tv/foxtashin" class="hover:text-purple-500 transition-colors"><i class="fa-brands fa-twitch"></i></a>
+        </div>
+        <p>© 2024 FoxTashinX. Все права защищены.</p>
+    </footer>
+
+    <!-- Particles.js Script -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 2 } }
+            },
+            "retina_detect": true
+        });
+
         // Инициализация Supabase
         const SUPABASE_URL = "https://your-supabase-project.supabase.co";
         const SUPABASE_ANON_KEY = "your-anonymous-key";
@@ -37,7 +163,7 @@
         async function checkAuthStatus() {
             const { data: { user } } = await supabaseClient.auth.getUser();
             if (user) {
-                alert("Вы уже авторизованы");
+                // alert("Вы уже авторизованы");
             }
         }
 
