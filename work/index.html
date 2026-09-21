@@ -82,48 +82,27 @@
                 <i class="fa-solid fa-xmark"></i>
             </button>
             
-            <div class="text-center mb-6">
-                <h2 class="text-2xl font-bold gradient-text mb-2">Авторизация</h2>
-                <p class="text-gray-400 text-sm">Войдите или зарегистрируйтесь</p>
-            </div>
-
-            <!-- Tabs -->
-            <div class="flex mb-6 border-b border-white/10">
-                <button onclick="switchTab('login')" id="tab-login" class="flex-1 py-2 text-sm font-semibold border-b-2 border-sky-400 text-white transition-colors">Вход</button>
-                <button onclick="switchTab('register')" id="tab-register" class="flex-1 py-2 text-sm font-semibold border-b-2 border-transparent text-gray-400 hover:text-white transition-colors">Регистрация</button>
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold gradient-text mb-2">Вход для своих</h2>
+                <p class="text-gray-400 text-sm">Доступ только по приглашениям</p>
             </div>
 
             <!-- Login Form -->
-            <form id="form-login" class="flex flex-col gap-4" onsubmit="event.preventDefault(); alert('Функция входа пока в разработке. Требуется настройка backend-сервера.');">
+            <form id="form-login" class="flex flex-col gap-4" onsubmit="handleLogin(event)">
                 <div>
-                    <label class="block text-xs text-gray-400 mb-1">Email</label>
-                    <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="your@email.com">
+                    <label class="block text-xs text-gray-400 mb-1">Имя пользователя (Логин)</label>
+                    <input type="text" id="login-username" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="Логин">
                 </div>
                 <div>
                     <label class="block text-xs text-gray-400 mb-1">Пароль</label>
-                    <input type="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="••••••••">
+                    <input type="password" id="login-password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="••••••••">
                 </div>
-                <button type="submit" class="w-full bg-sky-500 hover:bg-sky-400 text-white font-semibold py-2.5 rounded-lg transition-colors shadow-lg shadow-sky-500/30 mt-2">
+                
+                <div id="login-error" class="text-red-400 text-sm hidden">Неверный логин или пароль</div>
+                <div id="login-success" class="text-green-400 text-sm hidden">Успешный вход!</div>
+                
+                <button type="submit" id="login-btn" class="w-full bg-sky-500 hover:bg-sky-400 text-white font-semibold py-2.5 rounded-lg transition-colors shadow-lg shadow-sky-500/30 mt-2 flex justify-center items-center">
                     Войти
-                </button>
-            </form>
-
-            <!-- Register Form -->
-            <form id="form-register" class="flex flex-col gap-4 hidden" onsubmit="event.preventDefault(); alert('Функция регистрации пока в разработке. Требуется настройка backend-сервера.');">
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1">Имя</label>
-                    <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="Ваше имя">
-                </div>
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1">Email</label>
-                    <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="your@email.com">
-                </div>
-                <div>
-                    <label class="block text-xs text-gray-400 mb-1">Пароль</label>
-                    <input type="password" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400" placeholder="Создайте пароль">
-                </div>
-                <button type="submit" class="w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold py-2.5 rounded-lg transition-colors shadow-lg shadow-indigo-500/30 mt-2">
-                    Зарегистрироваться
                 </button>
             </form>
         </div>
@@ -243,29 +222,72 @@
                 modal.classList.add('hidden');
             }, 300);
         }
-
-        function switchTab(tab) {
-            const loginForm = document.getElementById('form-login');
-            const registerForm = document.getElementById('form-register');
-            const loginTab = document.getElementById('tab-login');
-            const registerTab = document.getElementById('tab-register');
-
-            if (tab === 'login') {
-                loginForm.classList.remove('hidden');
-                registerForm.classList.add('hidden');
-                loginTab.classList.replace('border-transparent', 'border-sky-400');
-                loginTab.classList.replace('text-gray-400', 'text-white');
-                registerTab.classList.replace('border-sky-400', 'border-transparent');
-                registerTab.classList.replace('text-white', 'text-gray-400');
-            } else {
-                registerForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-                registerTab.classList.replace('border-transparent', 'border-sky-400');
-                registerTab.classList.replace('text-gray-400', 'text-white');
-                loginTab.classList.replace('border-sky-400', 'border-transparent');
-                loginTab.classList.replace('text-white', 'text-gray-400');
+        
+        async function handleLogin(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('login-btn');
+            const errorMsg = document.getElementById('login-error');
+            const successMsg = document.getElementById('login-success');
+            
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+            
+            errorMsg.classList.add('hidden');
+            successMsg.classList.add('hidden');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Вход...';
+            btn.disabled = true;
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    successMsg.classList.remove('hidden');
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('username', data.username);
+                    setTimeout(() => {
+                        closeAuthModal();
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    errorMsg.textContent = data.message || 'Ошибка входа';
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorMsg.textContent = 'Ошибка соединения с сервером';
+                errorMsg.classList.remove('hidden');
+            } finally {
+                btn.innerHTML = 'Войти';
+                btn.disabled = false;
             }
         }
+        
+        // Update nav UI if logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('token');
+            const username = localStorage.getItem('username');
+            
+            if (token && username) {
+                // Find all login links and replace them with username and logout
+                const navLinks = document.querySelectorAll('a[onclick*="openAuthModal()"]');
+                navLinks.forEach(link => {
+                    link.innerHTML = `<i class="fa-solid fa-user mr-1"></i> ${username} (Выйти)`;
+                    link.className = "nav-link text-sky-400";
+                    link.onclick = (e) => {
+                        e.preventDefault();
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('username');
+                        window.location.reload();
+                    };
+                });
+            }
+        });
         
         // Close modal on outside click
         document.getElementById('auth-modal').addEventListener('click', function(e) {

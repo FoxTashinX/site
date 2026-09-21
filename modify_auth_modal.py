@@ -1,76 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Галерея видео из моего портфолио.">
-    <meta name="keywords" content="видео, портфолио, проекты">
-    <meta name="author" content="FoxTashinX">
-    <title>Уголок | FoxTashinX</title>
-    <!-- Tailwind CSS for rapid styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-        }
-        .nav-link {
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover, .nav-link.active {
-            color: #38bdf8;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-        }
-        .gradient-text {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-    </style>
-</head>
-<body class="antialiased">
-    <!-- Particles background container -->
-    <div id="particles-js"></div>
+import re
 
-    <header class="glass-panel mx-4 mt-6 p-4 sticky top-6 z-50">
-        <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="text-xl font-bold tracking-wider gradient-text">
-                FoxTashinX
-            </div>
-            <ul class="flex flex-wrap justify-center gap-6 text-sm font-medium">
-                <li><a href="../index.html" class="nav-link"><i class="fa-solid fa-house mr-1"></i> Главная</a></li>
-                <li><a href="../work/index.html" class="nav-link"><i class="fa-solid fa-briefcase mr-1"></i> Работы</a></li>
-                <li><a href="../diary/index.html" class="nav-link"><i class="fa-solid fa-book mr-1"></i> Дневник</a></li>
-                <li><a href="index.html" class="nav-link active"><i class="fa-solid fa-cloud-moon mr-1"></i> Уголок</a></li>
-                <!-- Author link will be removed in next step, along with others -->
-            <li><a href="#" onclick="event.preventDefault(); openAuthModal();" class="nav-link text-sky-400"><i class="fa-solid fa-right-to-bracket mr-1"></i> Войти</a></li>
-            </ul>
-        </nav>
-    </header>
-
+modal_html = """
     <!-- Auth Modal -->
     <div id="auth-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
         <div class="glass-panel p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300" id="auth-modal-content">
@@ -103,44 +33,9 @@
             </form>
         </div>
     </div>
+"""
 
-
-    <main class="container mx-auto px-4 py-16 flex-grow flex flex-col items-center">
-        <!-- Empty Content -->
-    </main>
-
-    <footer class="mt-auto py-8 text-center text-gray-400 text-sm glass-panel border-0 border-t border-white/10 rounded-none">
-        <div class="flex justify-center gap-6 mb-4 text-xl">
-            <a href="https://github.com/FoxTashinX" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.youtube.com/@foxytashin1036" class="hover:text-red-500 transition-colors"><i class="fa-brands fa-youtube"></i></a>
-            <a href="https://www.twitch.tv/foxtashin" class="hover:text-purple-500 transition-colors"><i class="fa-brands fa-twitch"></i></a>
-        </div>
-        <p>© 2024 FoxTashinX. Все права защищены.</p>
-    </footer>
-
-    <!-- Particles.js Script -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } }, "push": { "particles_nb": 2 } }
-            },
-            "retina_detect": true
-        });
-    </script>
-
-    <script>
+auth_scripts = """
         function openAuthModal() {
             const modal = document.getElementById('auth-modal');
             const content = document.getElementById('auth-modal-content');
@@ -233,7 +128,23 @@
                 closeAuthModal();
             }
         });
-    </script>
+"""
 
-</body>
-</html>
+files_to_update = ['index.html', 'work/index.html', 'diary/index.html', 'depressive-corner/index.html']
+
+for filepath in files_to_update:
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # 1. Replace the entire old Auth Modal
+    modal_pattern = r'<!-- Auth Modal -->.*?</div>\s*</div>'
+    content = re.sub(modal_pattern, modal_html.strip(), content, flags=re.DOTALL)
+    
+    # 2. Replace old scripts block
+    script_pattern = r'function openAuthModal\(\) \{.*?\n        \}\);'
+    content = re.sub(script_pattern, auth_scripts.strip(), content, flags=re.DOTALL)
+    
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.write(content)
+
+print("Removed registration and added real login logic to frontend.")
