@@ -69,12 +69,9 @@
             <div class="text-xl font-bold tracking-wider gradient-text">
                 FoxTashinX
             </div>
-            <ul class="flex flex-wrap justify-center gap-6 text-sm font-medium">
+            <ul id="main-nav" class="flex flex-wrap justify-center gap-6 text-sm font-medium">
                 <li><a href="index.html" class="nav-link active"><i class="fa-solid fa-house mr-1"></i> Главная</a></li>
-                <li><a href="work/index.html" class="nav-link"><i class="fa-solid fa-briefcase mr-1"></i> Работы</a></li>
-                <li><a href="diary/index.html" class="nav-link"><i class="fa-solid fa-book mr-1"></i> Дневник</a></li>
-                <li><a href="depressive-corner/index.html" class="nav-link"><i class="fa-solid fa-cloud-moon mr-1"></i> Уголок</a></li>
-            <li><a href="#" onclick="event.preventDefault(); openAuthModal();" class="nav-link text-sky-400"><i class="fa-solid fa-right-to-bracket mr-1"></i> Войти</a></li>
+                <li><a href="#" onclick="event.preventDefault(); openAuthModal();" class="nav-link text-sky-400"><i class="fa-solid fa-right-to-bracket mr-1"></i> Войти</a></li>
             </ul>
         </nav>
     </header>
@@ -113,40 +110,8 @@
     </div>
 
 
-    <main class="container mx-auto px-4 py-16 flex-grow flex flex-col items-center justify-center text-center">
-        <div class="glass-panel p-10 md:p-16 max-w-3xl w-full mb-12">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6">Добро пожаловать в моё <span class="gradient-text">Портфолио</span></h1>
-            <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-                Здесь собраны мои лучшие работы, мысли, творческие эксперименты и личный опыт. 
-                Исследуйте проекты и следите за моей активностью!
-            </p>
-            <div class="flex justify-center gap-4">
-                <a href="#projects" class="bg-sky-500 hover:bg-sky-400 text-white font-semibold py-3 px-8 rounded-full transition-colors shadow-lg shadow-sky-500/30">
-                    Смотреть проекты
-                </a>
-            </div>
-        </div>
-
-        <div id="projects" class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-            <!-- YouTube Card -->
-            <a href="https://www.youtube.com/@foxytashin1036" target="_blank" class="glass-panel p-8 card-hover flex flex-col items-center text-center group cursor-pointer decoration-none text-white">
-                <div class="text-red-500 text-5xl mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fa-brands fa-youtube"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-2">YouTube Канал</h2>
-                <p class="text-gray-400 text-sm">Мои видео-проекты, нарезки и творческие эксперименты.</p>
-            </a>
-
-            <!-- Twitch Card -->
-            <a href="https://www.twitch.tv/foxtashin" target="_blank" class="glass-panel p-8 card-hover flex flex-col items-center text-center group cursor-pointer decoration-none text-white">
-                <div class="text-purple-500 text-5xl mb-4 group-hover:scale-110 transition-transform">
-                    <i class="fa-brands fa-twitch"></i>
-                </div>
-                <h2 class="text-2xl font-bold mb-2">Twitch Трансляции</h2>
-                <p class="text-gray-400 text-sm">Прямые эфиры, игры и интерактивное общение со зрителями.</p>
-            </a>
-            
-        </div>
+    <main id="main-content" class="container mx-auto px-4 py-16 flex-grow flex flex-col items-center justify-center text-center">
+        <!-- Content will be injected dynamically by script.js -->
     </main>
 
     <footer class="mt-auto py-8 text-center text-gray-400 text-sm glass-panel border-0 border-t border-white/10 rounded-none">
@@ -296,34 +261,9 @@
             }
         }
         
-        // Update nav UI if logged in
-        document.addEventListener('DOMContentLoaded', () => {
-            const token = localStorage.getItem('token');
-            const username = localStorage.getItem('username');
-            
-            if (token && username) {
-                // Find all login links and replace them with username and logout
-                const navLinks = document.querySelectorAll('a[onclick*="openAuthModal()"]');
-                navLinks.forEach(link => {
-                    link.innerHTML = `<i class="fa-solid fa-user mr-1"></i> ${username} (Выйти)`;
-                    link.className = "nav-link text-sky-400";
-                    link.onclick = (e) => {
-                        e.preventDefault();
-                        localStorage.removeItem('token');
-                        localStorage.removeItem('username');
-                        window.location.reload();
-                    };
-                });
-            }
-        });
-        
-        // Close modal on outside click
-        document.getElementById('auth-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeAuthModal();
-            }
-        });
+        // Logic moved to script.js
     </script>
+    <script src="script.js"></script>
 
 </body>
 </html><!-- Обновление дизайна -->
