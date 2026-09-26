@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy_proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./html:/srv/html
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - vpn_network
+
+  xray:
+    image: teddysun/xray:latest
+    container_name: xray_vpn
+    restart: always
+    volumes:
+      - ./xray/config.json:/etc/xray/config.json
+    networks:
+      - vpn_network
+
+networks:
+  vpn_network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

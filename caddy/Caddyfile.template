@@ -1,0 +1,12 @@
+${DOMAIN} {
+    # Сначала пытаемся отдать статику (заглушку)
+    root * /srv/html
+    file_server
+
+    # Проксируем gRPC трафик на Xray
+    @grpc {
+        protocol grpc
+        path /${GRPC_PATH}/*
+    }
+    reverse_proxy @grpc h2c://xray:10080
+}
